@@ -1,0 +1,24 @@
+:root {
+  --color-black: #101828;
+  --color-gray: #475467;
+  --color-orange: #e44848;
+  --color-orangeDark: #d84343;
+  --color-yellow: #ffc531;
+  --color-lightBlue: #f2f4f7;
+  --color-lightGray: #f7f7f7;
+  --color-scrollbar: #d9d9d9;
+  --color-white: #ffffff;
+
+  --color-blackTransp02: #10182833;
+  --color-blackTransp06: #10182899;
+  --color-grayTransp: #47546733;
+  --color-filterLine: #10182819;
+
+  --font-main: Inter;
+
+  --font-size-small: 14px;
+  --font-size-smallmedium: 18px;
+  --font-size-smalllarge: 22px;
+
+  --transition: 0.3s ease;
+}
