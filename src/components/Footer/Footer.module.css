@@ -1,0 +1,14 @@
+.container {
+  background-color: var(--color-lightGray);
+}
+
+.navSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 1352px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 24px 20px;
+}

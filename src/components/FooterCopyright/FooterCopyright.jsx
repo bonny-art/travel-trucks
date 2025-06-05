@@ -1,0 +1,30 @@
+import styles from "./FooterCopyright.module.css";
+
+export const FooterCopyright = () => {
+  return (
+    <div className={styles.copyrightContainer}>
+      <div className={styles.copyrightSection}>
+        <div className={styles.copyright}>
+          <p>
+            Developed by{" "}
+            <a
+              href="https://www.linkedin.com/in/svitlana-otenko/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Svitlana Otenko
+            </a>
+            , a student of{" "}
+            <a
+              href="https://goit.ua/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GoIT School
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};

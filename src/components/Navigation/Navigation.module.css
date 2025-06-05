@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  gap: 32px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  position: relative;
+  transition: transform var(--transition);
+}
+
+.text {
+  display: inline-block;
+  transition: transform var(--transition);
+}
+
+.link:hover .text,
+.link:focus .text {
+  transform: scale(var(--scale));
+}
+
+.active {
+  color: var(--color-orangeDark);
+}
+
+.headerUnderline.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -24px;
+  height: 3px;
+  background-color: var(--color-orangeDark);
+}

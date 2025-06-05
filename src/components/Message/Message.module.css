@@ -1,0 +1,10 @@
+.messageBox {
+  display: flex;
+  justify-content: center;
+  padding: 200px 0;
+}
+
+.messageBox p {
+  text-align: center;
+  color: var(--color-gray);
+}

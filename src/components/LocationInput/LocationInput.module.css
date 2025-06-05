@@ -1,0 +1,33 @@
+.container {
+  position: relative;
+}
+
+.icon {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  width: 18px;
+  height: 20px;
+
+  fill: var(--color-black);
+}
+
+.input {
+  border: none;
+  border-radius: 10px;
+  padding: 18px;
+  padding-left: 44px;
+  width: 360px;
+  height: 56px;
+  line-height: 1.25;
+  background: var(--color-lightGray);
+}
+
+.input:focus-visible {
+  outline: none;
+}
+
+.input::placeholder {
+  line-height: 1.25;
+  color: var(--color-blackTransp06);
+}

@@ -1,0 +1,77 @@
+.form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.wrapper {
+  display: flex;
+  gap: 8px;
+  font-family: "Roboto-Regular";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.25;
+  user-select: none;
+}
+
+.wrapper .van {
+  width: 100px;
+}
+
+.wrapper .fully-integrated {
+  width: 128px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.wrapper .alcove {
+  width: 112px;
+}
+
+.input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.label {
+  user-select: none;
+}
+
+.customInput {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--color-blackTransp02);
+  border-radius: 10px;
+  transition: border-color var(--transition);
+  height: 95px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.customInput p {
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  text-align: center;
+  color: var(--color-black);
+}
+
+.customInput.selected {
+  border-color: var(--color-orange);
+}
+
+.icon {
+  width: 40px;
+  height: 28px;
+}

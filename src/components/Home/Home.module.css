@@ -1,0 +1,44 @@
+.section {
+  width: 1440px;
+
+  padding: 260px 0;
+  margin: 0 auto;
+
+  background-color: var(--color-gray);
+  background-image: image-set(
+    url("../../assets/images/home-01@1x.jpg") 1x,
+    url("../../assets/images/home-01@2x.jpg") 2x
+  );
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  width: 100%;
+
+  padding: 0 64px;
+
+  gap: 40px;
+}
+
+.textBox {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  font-weight: 600;
+
+  color: var(--color-lightGray);
+}
+
+.title {
+  font-size: 48px;
+  line-height: 0.66;
+}
+
+.subtitle {
+  font-size: 24px;
+  line-height: 1.33;
+}
