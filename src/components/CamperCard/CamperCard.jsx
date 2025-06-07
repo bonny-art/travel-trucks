@@ -2,13 +2,14 @@ import { selectFavoriteCampers } from "../../store/campers/campersSlice";
 import { useSelector } from "react-redux";
 import sprite from "../../assets/icons/sprite.svg";
 import styles from "./CamperCard.module.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { capitalizeFirstLetter } from "../../helpers/helpers";
-import { Button } from "../Button/Button";
-import { FavoriteButton } from "../FavoriteButton/FavoriteButton";
+import Button from "../Button/Button";
+import FavoriteButton from "../FavoriteButton/FavoriteButton";
 
-export const CamperCard = ({ camper }) => {
+const CamperCard = ({ camper }) => {
   const endpoint = useLocation().pathname.slice(1);
+  const navigate = useNavigate();
 
   const {
     id,
@@ -33,6 +34,10 @@ export const CamperCard = ({ camper }) => {
 
   const favoriteItems = useSelector(selectFavoriteCampers);
   const isInFavorite = favoriteItems.some((item) => item.id === id);
+
+  const handleShowMore = () => {
+    navigate(`/catalog/${id}`);
+  };
 
   return (
     <>
@@ -81,13 +86,6 @@ export const CamperCard = ({ camper }) => {
           <p className={styles.description}>{description}</p>
 
           <div className={styles.featuresContainer}>
-            {/* <div className={styles.label}>
-              <svg className={styles.icon}>
-                <use xlinkHref={`${sprite}#transmission`}></use>
-              </svg>
-              <p>{capitalizeFirstLetter(transmission)}</p>
-            </div> */}
-
             {transmission === "automatic" && (
               <div className={styles.label}>
                 <svg className={styles.icon}>
@@ -178,7 +176,7 @@ export const CamperCard = ({ camper }) => {
           </div>
 
           <div>
-            <Button className="orange" type="button">
+            <Button className="orange" type="button" onClick={handleShowMore}>
               Show more
             </Button>
           </div>
@@ -187,3 +185,5 @@ export const CamperCard = ({ camper }) => {
     </>
   );
 };
+
+export default CamperCard;

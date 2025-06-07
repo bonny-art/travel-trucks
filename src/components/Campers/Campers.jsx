@@ -9,13 +9,13 @@ import {
   selectIsLoading,
 } from "../../store/campers/campersSlice";
 import styles from "./Campers.module.css";
-import { Button } from "../Button/Button";
-import { CampersList } from "../CampersList/CampersList";
-import { Message } from "../Message/Message";
-import { Loader } from "../Loader/Loader";
+import Button from "../Button/Button";
+import CampersList from "../CampersList/CampersList";
+import Message from "../Message/Message";
+import Loader from "../Loader/Loader";
 import { fetchCampersThunk } from "../../store/campers/campertThunks";
 
-export const Campers = () => {
+const Campers = () => {
   const campers = useSelector(selectCampers);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
@@ -76,3 +76,5 @@ export const Campers = () => {
     </div>
   );
 };
+
+export default Campers;

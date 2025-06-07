@@ -1,6 +1,6 @@
 import BeatLoader from "react-spinners/BeatLoader";
 
-export const Loader = () => {
+const Loader = () => {
   return (
     <BeatLoader
       color="var(--color-orange)"
@@ -10,3 +10,5 @@ export const Loader = () => {
     />
   );
 };
+
+export default Loader;

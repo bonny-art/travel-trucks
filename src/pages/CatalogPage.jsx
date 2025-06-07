@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchCampersThunk } from "../store/campers/campertThunks";
-import { Catalog } from "../components/Catalog/Catalog";
+import Catalog from "../components/Catalog/Catalog";
 
 const CatalogPage = () => {
   const dispatch = useDispatch();

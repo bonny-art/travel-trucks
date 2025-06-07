@@ -3,7 +3,7 @@ import sprite from "../../assets/icons/sprite.svg";
 import styles from "./FavoriteButton.module.css";
 import { campersActions } from "../../store/campers/campersSlice";
 
-export const FavoriteButton = ({ camper, isInFavorite }) => {
+const FavoriteButton = ({ camper, isInFavorite }) => {
   const dispatch = useDispatch();
 
   const icon = isInFavorite ? "heart-pressed" : "heart";
@@ -28,3 +28,5 @@ export const FavoriteButton = ({ camper, isInFavorite }) => {
     </button>
   );
 };
+
+export default FavoriteButton;

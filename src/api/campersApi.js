@@ -13,3 +13,8 @@ export const getCampers = async (params = {}) => {
 
   return { ...data, page: params.page };
 };
+
+export const getCamperById = async (id) => {
+  const { data } = await axios.get(mockapiConstants.CAMPER_BY_ID_ENDPOINT(id));
+  return data;
+};

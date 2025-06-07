@@ -1,18 +1,20 @@
-import { Campers } from "../Campers/Campers";
-import { SideBar } from "../SideBar/SideBar";
+import Campers from "../Campers/Campers";
+import SideBar from "../SideBar/SideBar";
 import styles from "./Catalog.module.css";
 
-export const Catalog = () => {
+const Catalog = () => {
   return (
-    <div className={styles.container}>
-      <section className={styles.section}>
+    <section className={styles.section}>
+      <div className={styles.container}>
         <div>
           <SideBar />
         </div>
         <div>
           <Campers />
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
+
+export default Catalog;

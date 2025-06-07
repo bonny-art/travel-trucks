@@ -4,11 +4,7 @@ import styles from "./CheckboxFilter.module.css";
 import clsx from "clsx";
 import { mapName } from "../../helpers/helpers";
 
-export const CheckboxFilter = ({
-  onEquipmentChange,
-  isCleared,
-  setIsCleared,
-}) => {
+const CheckboxFilter = ({ onEquipmentChange, isCleared, setIsCleared }) => {
   const [selectedEquipment, setSelectedEquipment] = useState([]);
   const [prevSelectedEquipment, setPrevSelectedEquipment] = useState([]);
 
@@ -73,3 +69,5 @@ export const CheckboxFilter = ({
     </div>
   );
 };
+
+export default CheckboxFilter;

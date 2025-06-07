@@ -1,7 +1,7 @@
 import styles from "./Button.module.css";
 import clsx from "clsx";
 
-export const Button = ({ children, onClick, type = "button", className }) => {
+const Button = ({ children, onClick, type = "button", className }) => {
   return (
     <button
       type={type}
@@ -12,3 +12,5 @@ export const Button = ({ children, onClick, type = "button", className }) => {
     </button>
   );
 };
+
+export default Button;

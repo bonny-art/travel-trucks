@@ -1,9 +1,9 @@
 import styles from "./Footer.module.css";
-import { Navigation } from "../Navigation/Navigation";
-import { Logo } from "../Logo/Logo";
-import { FooterCopyright } from "../FooterCopyright/FooterCopyright";
+import Navigation from "../Navigation/Navigation";
+import Logo from "../Logo/Logo";
+import FooterCopyright from "../FooterCopyright/FooterCopyright";
 
-export const Footer = () => {
+const Footer = () => {
   return (
     <footer className={styles.container}>
       <div className={styles.navSection}>
@@ -15,3 +15,5 @@ export const Footer = () => {
     </footer>
   );
 };
+
+export default Footer;

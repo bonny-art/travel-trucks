@@ -1,7 +1,7 @@
-import { CamperCard } from "../CamperCard/CamperCard";
+import CamperCard from "../CamperCard/CamperCard";
 import styles from "./CampersList.module.css";
 
-export const CampersList = ({ campers }) => {
+const CampersList = ({ campers }) => {
   return (
     <ul className={styles.container}>
       {campers.map((camper) => (
@@ -10,3 +10,5 @@ export const CampersList = ({ campers }) => {
     </ul>
   );
 };
+
+export default CampersList;

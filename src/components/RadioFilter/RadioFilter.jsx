@@ -3,7 +3,7 @@ import sprite from "../../assets/icons/sprite.svg";
 import styles from "./RadioFilter.module.css";
 import clsx from "clsx";
 
-export const RadioFilter = ({ onFormChange, isCleared, setIsCleared }) => {
+const RadioFilter = ({ onFormChange, isCleared, setIsCleared }) => {
   const [selectedValue, setSelectedValue] = useState("");
 
   useEffect(() => {
@@ -94,3 +94,5 @@ export const RadioFilter = ({ onFormChange, isCleared, setIsCleared }) => {
     </form>
   );
 };
+
+export default RadioFilter;

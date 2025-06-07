@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCampersThunk } from "./campertThunks";
+import { fetchCamperByIdThunk, fetchCampersThunk } from "./campertThunks";
 
 export const selectCampers = (state) => state.campers.items;
 export const selectFavoriteCampers = (state) => state.campers.favoriteItems;
@@ -9,6 +9,8 @@ export const selectCurrentPage = (state) => state.campers.currentPage;
 export const selectFilters = (state) => state.campers.filters;
 export const selectHasMore = (state) => state.campers.hasMore;
 
+export const selectCurrentCamper = (state) => state.campers.camper;
+
 const initialState = {
   items: [],
   favoriteItems: [],
@@ -16,6 +18,7 @@ const initialState = {
   error: "",
   currentPage: 1,
   hasMore: true,
+  camper: null,
   filters: {
     location: "",
     equipment: [],
@@ -28,6 +31,10 @@ const campersSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder
+      .addCase(fetchCampersThunk.pending, (state) => {
+        state.isLoading = true;
+        state.error = "";
+      })
       .addCase(fetchCampersThunk.fulfilled, (state, { payload }) => {
         const { items, page, hasMore } = payload;
 
@@ -39,29 +46,29 @@ const campersSlice = createSlice({
 
         state.currentPage = page;
         state.hasMore = hasMore;
+        state.isLoading = false;
+        state.error = "";
       })
-      .addMatcher(
-        ({ type }) => type.endsWith("/pending"),
-        (state) => {
-          state.isLoading = true;
-          state.error = "";
-        }
-      )
-      .addMatcher(
-        ({ type }) => type.endsWith("/fulfilled"),
-        (state) => {
-          state.isLoading = false;
-          state.error = "";
-        }
-      )
-      .addMatcher(
-        ({ type }) => type.endsWith("/rejected"),
-        (state, { payload }) => {
-          state.isLoading = false;
-          state.error = payload;
-          state.hasMore = false;
-        }
-      );
+      .addCase(fetchCampersThunk.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+        state.hasMore = false;
+      })
+      .addCase(fetchCamperByIdThunk.pending, (state) => {
+        state.isLoading = true;
+        state.error = "";
+        state.camper = null;
+      })
+      .addCase(fetchCamperByIdThunk.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = "";
+        state.camper = payload;
+      })
+      .addCase(fetchCamperByIdThunk.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+        state.camper = null;
+      });
   },
   reducers: {
     addToFavoriteItemsAction: (state, { payload }) => {

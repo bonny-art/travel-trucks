@@ -1,0 +1,51 @@
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.25;
+}
+
+.attributes {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.labels {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.starIcon {
+  width: 16px;
+  height: 16px;
+  fill: var(--color-yellow);
+}
+
+.camperRating {
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+}
+
+.mapIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.price {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.25;
+}

@@ -1,0 +1,18 @@
+.block {
+  display: flex;
+  gap: 4px;
+  height: 16px;
+}
+
+.starIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.starFilled {
+  fill: var(--color-yellow);
+}
+
+.starEmpty {
+  fill: var(--color-lightBlue);
+}

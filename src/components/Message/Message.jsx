@@ -1,9 +1,11 @@
 import styles from "./Message.module.css";
 
-export const Message = ({ children }) => {
+const Message = ({ children }) => {
   return (
     <div className={styles.messageBox}>
       <p>{children}</p>
     </div>
   );
 };
+
+export default Message;

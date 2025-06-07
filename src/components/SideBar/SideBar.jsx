@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import styles from "./SideBar.module.css";
-import { LocationInput } from "../LocationInput/LocationInput";
-import { CheckboxFilter } from "../CheckboxFilter/CheckboxFilter";
-import { RadioFilter } from "../RadioFilter/RadioFilter";
-import { Button } from "../Button/Button";
+import LocationInput from "../LocationInput/LocationInput";
+import CheckboxFilter from "../CheckboxFilter/CheckboxFilter";
+import RadioFilter from "../RadioFilter/RadioFilter";
+import Button from "../Button/Button";
 import { mapName } from "../../helpers/helpers";
 import { campersActions } from "../../store/campers/campersSlice";
 
-export const SideBar = () => {
+const SideBar = () => {
   const dispatch = useDispatch();
 
   const [location, setLocation] = useState("");
@@ -105,3 +105,5 @@ export const SideBar = () => {
     </div>
   );
 };
+
+export default SideBar;

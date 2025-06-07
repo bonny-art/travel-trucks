@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import styles from "./Navigation.module.css";
 import clsx from "clsx";
 
-export const Navigation = ({ position }) => {
+const Navigation = ({ position }) => {
   return (
     <div className={styles.container}>
       <NavLink
@@ -19,6 +19,7 @@ export const Navigation = ({ position }) => {
       </NavLink>
       <NavLink
         to="/catalog"
+        end
         className={({ isActive }) =>
           clsx(
             styles.link,
@@ -44,3 +45,5 @@ export const Navigation = ({ position }) => {
     </div>
   );
 };
+
+export default Navigation;

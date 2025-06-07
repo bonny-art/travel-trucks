@@ -1,0 +1,58 @@
+.section {
+  padding: 48px 0 80px;
+}
+
+.container {
+  width: 1352px;
+  margin: 0 auto;
+  padding: 0 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+}
+
+.tabButtonsContainer {
+  display: flex;
+  gap: 40px;
+  height: 48px;
+  border-bottom: 1px solid var(--color-blackTransp02);
+}
+
+.tabButton {
+  position: relative;
+  margin-bottom: 24px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.2;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.activeTab::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -27px;
+  height: 5px;
+  background-color: var(--color-orange);
+}
+
+.bottomContainer {
+  display: flex;
+  justify-content: space-between;
+}

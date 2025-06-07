@@ -2,11 +2,7 @@ import { useEffect, useState } from "react";
 import sprite from "../../assets/icons/sprite.svg";
 import styles from "./LocationInput.module.css";
 
-export const LocationInput = ({
-  onLocationSelect,
-  isCleared,
-  setIsCleared,
-}) => {
+const LocationInput = ({ onLocationSelect, isCleared, setIsCleared }) => {
   const [userInput, setUserInput] = useState("");
 
   useEffect(() => {
@@ -37,3 +33,5 @@ export const LocationInput = ({
     </div>
   );
 };
+
+export default LocationInput;

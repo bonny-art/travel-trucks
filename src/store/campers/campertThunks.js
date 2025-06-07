@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getCampers } from "../../api/campersApi";
+import { getCamperById, getCampers } from "../../api/campersApi";
 import { ITEMS_PER_PAGE } from "../../constants/uiConstants";
 
 export const fetchCampersThunk = createAsyncThunk(
@@ -37,6 +37,18 @@ export const fetchCampersThunk = createAsyncThunk(
       }
 
       return rejectWithValue("Something went wrong. Try again later.");
+    }
+  }
+);
+
+export const fetchCamperByIdThunk = createAsyncThunk(
+  "campers/fetchById",
+  async (id, { rejectWithValue }) => {
+    try {
+      const data = await getCamperById(id);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
     }
   }
 );

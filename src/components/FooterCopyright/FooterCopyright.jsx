@@ -1,6 +1,6 @@
 import styles from "./FooterCopyright.module.css";
 
-export const FooterCopyright = () => {
+const FooterCopyright = () => {
   return (
     <div className={styles.copyrightContainer}>
       <div className={styles.copyrightSection}>
@@ -28,3 +28,5 @@ export const FooterCopyright = () => {
     </div>
   );
 };
+
+export default FooterCopyright;

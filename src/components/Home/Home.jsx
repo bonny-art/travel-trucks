@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { Button } from "../Button/Button";
+import Button from "../Button/Button";
 import styles from "./Home.module.css";
 
-export const Home = () => {
+const Home = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -25,3 +25,5 @@ export const Home = () => {
     </section>
   );
 };
+
+export default Home;
