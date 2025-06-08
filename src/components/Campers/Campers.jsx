@@ -44,7 +44,7 @@ const Campers = () => {
 
     const fetchPages = async (targetPage) => {
       const result = await dispatch(
-        fetchCampersThunk({ page: 1, params: filter, from: "Page 1" })
+        fetchCampersThunk({ page: 1, params: filter })
       );
 
       if (!result.payload) return;
@@ -56,9 +56,7 @@ const Campers = () => {
         const fetchPromises = [];
         for (let page = 2; page <= finalPage; page += 1) {
           fetchPromises.push(
-            dispatch(
-              fetchCampersThunk({ page, params: filter, from: `Page ${page}` })
-            )
+            dispatch(fetchCampersThunk({ page, params: filter }))
           );
         }
         await Promise.all(fetchPromises);
@@ -86,9 +84,7 @@ const Campers = () => {
     const nextPage = currentPage + 1;
 
     dispatch(campersActions.setCurrentPageAction(nextPage));
-    dispatch(
-      fetchCampersThunk({ page: nextPage, params: filter, from: "LoadMore" })
-    );
+    dispatch(fetchCampersThunk({ page: nextPage, params: filter }));
     setSearchParams({ page: nextPage, ...filter });
   };
 

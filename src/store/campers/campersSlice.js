@@ -66,7 +66,6 @@ const campersSlice = createSlice({
         state.camper = null;
       })
       .addCase(fetchCamperByIdThunk.fulfilled, (state, { payload }) => {
-        console.log("🚀 ~ payload:", payload);
         state.isLoading = false;
         state.error = "";
         state.camper = payload;

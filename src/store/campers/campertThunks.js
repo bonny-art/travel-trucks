@@ -5,10 +5,8 @@ import { ITEMS_PER_PAGE } from "../../constants/uiConstants";
 export const fetchCampersThunk = createAsyncThunk(
   "campers/fetchAll",
   async (options = {}, { rejectWithValue }) => {
-    console.log("🚀 ~ options:", options);
     try {
-      const { page = 1, params = {}, from } = options;
-      console.log("🚀 ~ from:", from);
+      const { page = 1, params = {} } = options;
 
       const { items, total } = await getCampers({ page, ...params });
 

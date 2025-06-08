@@ -17,7 +17,6 @@ const CheckboxFilter = ({
   }, [isCleared, setIsCleared]);
 
   const handleCheckboxChange = (equipment) => {
-    console.log("🚀 ~ equipment:", equipment);
     const newValue = value.includes(equipment)
       ? value.filter((item) => item !== equipment)
       : [...value, equipment];

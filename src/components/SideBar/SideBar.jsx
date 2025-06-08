@@ -56,10 +56,8 @@ const SideBar = () => {
       form: mapName(form),
       equipment,
     };
-    console.log("🚀 ~ filters:", filters);
 
     const payload = transformFiltersToPlainObject(filters);
-    console.log("🚀 ~ payload:", payload);
 
     const isSame = JSON.stringify(payload) === JSON.stringify(filtersInStore);
     if (isSame) return;
