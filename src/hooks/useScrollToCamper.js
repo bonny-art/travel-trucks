@@ -5,15 +5,7 @@ import {
   selectCurrentPage,
   selectIsLoading,
 } from "../store/campers/campersSlice";
-
-const scrollToCamperById = (id) => {
-  const element = document.getElementById(`camper-${id}`);
-  if (element) {
-    element.scrollIntoView({ behavior: "smooth", block: "center" });
-    return true;
-  }
-  return false;
-};
+import { scrollToCamperById, scrollToTop } from "../utils/scroll";
 
 const useScrollToCamper = () => {
   const location = useLocation();
@@ -27,14 +19,14 @@ const useScrollToCamper = () => {
   const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
-    if (
-      scrollToCamperId &&
-      !hasScrolled.current &&
-      !isLoading &&
-      currentPage >= page
-    ) {
-      const success = scrollToCamperById(scrollToCamperId);
-      if (success) hasScrolled.current = true;
+    if (!hasScrolled.current && !isLoading && currentPage >= page) {
+      if (scrollToCamperId) {
+        const success = scrollToCamperById(scrollToCamperId);
+        if (success) hasScrolled.current = true;
+      } else {
+        scrollToTop();
+        hasScrolled.current = true;
+      }
     }
   }, [scrollToCamperId, currentPage, isLoading, page]);
 };

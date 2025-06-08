@@ -17,7 +17,7 @@ import Message from "../Message/Message";
 import Loader from "../Loader/Loader";
 import { fetchCampersThunk } from "../../store/campers/campertThunks";
 import { useSearchParams } from "react-router-dom";
-import { scrollUp } from "../../helpers/helpers";
+import { scrollToTop } from "../../utils/scroll";
 
 const Campers = () => {
   const campers = useSelector(selectCampers);
@@ -71,7 +71,7 @@ const Campers = () => {
     } else {
       if (prevFiltersRef.current !== currentFiltersJSON) {
         fetchPages(1);
-        scrollUp();
+        scrollToTop();
       }
     }
 

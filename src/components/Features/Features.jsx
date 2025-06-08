@@ -1,7 +1,7 @@
 import styles from "./Features.module.css";
 import sprite from "../../assets/icons/sprite.svg";
-import { capitalizeFirstLetter } from "../../helpers/helpers";
 import { getType } from "../../utils/mapping";
+import { capitalizeFirstLetter } from "../../utils/stringUtils";
 
 export const Features = ({ camper }) => {
   const {

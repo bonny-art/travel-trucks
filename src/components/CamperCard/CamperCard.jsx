@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 import sprite from "../../assets/icons/sprite.svg";
 import styles from "./CamperCard.module.css";
 import { useLocation } from "react-router-dom";
-import { capitalizeFirstLetter } from "../../helpers/helpers";
 import Button from "../Button/Button";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
+import { capitalizeFirstLetter } from "../../utils/stringUtils";
 
 const CamperCard = ({ camper }) => {
   const currentLocation = useLocation();
