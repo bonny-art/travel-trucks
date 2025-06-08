@@ -1,21 +1,43 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./SideBar.module.css";
 import LocationInput from "../LocationInput/LocationInput";
 import CheckboxFilter from "../CheckboxFilter/CheckboxFilter";
 import RadioFilter from "../RadioFilter/RadioFilter";
 import Button from "../Button/Button";
 import { mapName } from "../../helpers/helpers";
-import { campersActions } from "../../store/campers/campersSlice";
+import {
+  campersActions,
+  selectFilters,
+} from "../../store/campers/campersSlice";
+import {
+  transformFiltersToPlainObject,
+  transformFiltersToVolumeObject,
+} from "../../helpers/transformFilters";
 
 const SideBar = () => {
   const dispatch = useDispatch();
+
+  const filtersInStore = useSelector(selectFilters);
 
   const [location, setLocation] = useState("");
   const [equipment, setEquipment] = useState([]);
   const [form, setForm] = useState("");
 
-  const [isCleared, setIsCleared] = useState(false);
+  useEffect(() => {
+    const {
+      location: locationFromStore = "",
+      equipment: equipmentFromStore = [],
+      form: formFromStore = "",
+    } = transformFiltersToVolumeObject(filtersInStore).filters;
+
+    setLocation(locationFromStore);
+    setEquipment(equipmentFromStore);
+    setForm(formFromStore);
+  }, [filtersInStore]);
+
+  const isFormEmpty =
+    !location.trim() && equipment.length === 0 && !form.trim();
 
   const handleLocationSelect = (newLocation) => {
     setLocation(newLocation);
@@ -28,23 +50,32 @@ const SideBar = () => {
   const handleFormChange = (newForm) => {
     setForm(newForm);
   };
+  const handleSearch = () => {
+    const filters = {
+      location: location.toLowerCase().trim(),
+      form: mapName(form),
+      equipment,
+    };
+    console.log("🚀 ~ filters:", filters);
 
-  const handleButtonClick = (actionName) => {
-    if (actionName === "search") {
-      const payload = {
-        location: location.toLowerCase().trim(),
-        form: mapName(form),
-        equipment,
-      };
+    const payload = transformFiltersToPlainObject(filters);
+    console.log("🚀 ~ payload:", payload);
 
-      dispatch(campersActions.setFiltersAction(payload));
-    } else if (actionName === "clear") {
-      setLocation("");
-      setEquipment([]);
-      setForm("");
-      dispatch(campersActions.clearFiltersAction());
-      setIsCleared(true);
-    }
+    const isSame = JSON.stringify(payload) === JSON.stringify(filtersInStore);
+    if (isSame) return;
+
+    dispatch(campersActions.setFiltersAction(payload));
+  };
+
+  const handleClear = () => {
+    if (isFormEmpty) return;
+
+    setLocation("");
+    setEquipment([]);
+    setForm("");
+
+    dispatch(campersActions.clearFiltersAction());
+    dispatch(campersActions.setCurrentPageAction(1));
   };
 
   return (
@@ -56,8 +87,6 @@ const SideBar = () => {
             <LocationInput
               value={location}
               onLocationSelect={handleLocationSelect}
-              isCleared={isCleared}
-              setIsCleared={setIsCleared}
             />
           </div>
 
@@ -68,9 +97,8 @@ const SideBar = () => {
                 <h4>Vehicle equipment</h4>
               </div>
               <CheckboxFilter
+                value={equipment}
                 onEquipmentChange={handleEquipmentChange}
-                isCleared={isCleared}
-                setIsCleared={setIsCleared}
               />
             </div>
           </div>
@@ -79,25 +107,15 @@ const SideBar = () => {
             <div className={styles.filterTitle}>
               <h4>Vehicle type</h4>
             </div>
-            <RadioFilter
-              onFormChange={handleFormChange}
-              isCleared={isCleared}
-              setIsCleared={setIsCleared}
-            />
+            <RadioFilter value={form} onFormChange={handleFormChange} />
           </div>
         </div>
 
         <div className={styles.buttonsBox}>
-          <Button
-            className="orange"
-            onClick={() => handleButtonClick("search")}
-          >
+          <Button className="orange" onClick={handleSearch}>
             Search
           </Button>
-          <Button
-            className="transparent"
-            onClick={() => handleButtonClick("clear")}
-          >
+          <Button className="transparent" onClick={handleClear}>
             Clear
           </Button>
         </div>

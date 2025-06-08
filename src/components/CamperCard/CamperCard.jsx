@@ -2,14 +2,15 @@ import { selectFavoriteCampers } from "../../store/campers/campersSlice";
 import { useSelector } from "react-redux";
 import sprite from "../../assets/icons/sprite.svg";
 import styles from "./CamperCard.module.css";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { capitalizeFirstLetter } from "../../helpers/helpers";
 import Button from "../Button/Button";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
 
 const CamperCard = ({ camper }) => {
-  const endpoint = useLocation().pathname.slice(1);
-  const navigate = useNavigate();
+  const currentLocation = useLocation();
+
+  const endpoint = currentLocation.pathname.slice(1);
 
   const {
     id,
@@ -35,13 +36,9 @@ const CamperCard = ({ camper }) => {
   const favoriteItems = useSelector(selectFavoriteCampers);
   const isInFavorite = favoriteItems.some((item) => item.id === id);
 
-  const handleShowMore = () => {
-    navigate(`/catalog/${id}`);
-  };
-
   return (
     <>
-      <li className={styles.container} key={id}>
+      <li className={styles.container} key={id} id={`camper-${id}`}>
         <div
           className={
             endpoint === "favorites"
@@ -176,7 +173,11 @@ const CamperCard = ({ camper }) => {
           </div>
 
           <div>
-            <Button className="orange" type="button" onClick={handleShowMore}>
+            <Button
+              className="orange"
+              to={`/catalog/${id}`}
+              state={{ from: currentLocation }}
+            >
               Show more
             </Button>
           </div>

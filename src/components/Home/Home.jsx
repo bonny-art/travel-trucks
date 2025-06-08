@@ -1,14 +1,7 @@
-import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 import styles from "./Home.module.css";
 
 const Home = () => {
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate("/catalog");
-  };
-
   return (
     <section className={styles.section}>
       <div className={styles.container}>
@@ -18,7 +11,7 @@ const Home = () => {
             You can find everything you want in our catalog
           </h2>
         </div>
-        <Button className="orange" onClick={handleClick}>
+        <Button className="orange" to="/catalog">
           View Now
         </Button>
       </div>

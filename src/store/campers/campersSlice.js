@@ -7,7 +7,11 @@ export const selectIsLoading = (state) => state.campers.isLoading;
 export const selectError = (state) => state.campers.error;
 export const selectCurrentPage = (state) => state.campers.currentPage;
 export const selectFilters = (state) => state.campers.filters;
+export const selectFiltersInitialized = (state) =>
+  state.campers.filtersInitialized;
+
 export const selectHasMore = (state) => state.campers.hasMore;
+export const selectTotalPages = (state) => state.campers.totalPages;
 
 export const selectCurrentCamper = (state) => state.campers.camper;
 
@@ -18,12 +22,10 @@ const initialState = {
   error: "",
   currentPage: 1,
   hasMore: true,
+  totalPages: 0,
   camper: null,
-  filters: {
-    location: "",
-    equipment: [],
-    form: "",
-  },
+  filters: {},
+  filtersInitialized: false,
 };
 
 const campersSlice = createSlice({
@@ -36,16 +38,20 @@ const campersSlice = createSlice({
         state.error = "";
       })
       .addCase(fetchCampersThunk.fulfilled, (state, { payload }) => {
-        const { items, page, hasMore } = payload;
+        const { items, page, hasMore, totalPages } = payload;
 
         if (page === 1) {
           state.items = items;
         } else {
-          state.items.push(...items);
+          const existingIds = new Set(state.items.map((item) => item.id));
+          const newUniqueItems = items.filter(
+            (item) => !existingIds.has(item.id)
+          );
+          state.items.push(...newUniqueItems);
         }
 
-        state.currentPage = page;
         state.hasMore = hasMore;
+        state.totalPages = totalPages;
         state.isLoading = false;
         state.error = "";
       })
@@ -60,6 +66,7 @@ const campersSlice = createSlice({
         state.camper = null;
       })
       .addCase(fetchCamperByIdThunk.fulfilled, (state, { payload }) => {
+        console.log("🚀 ~ payload:", payload);
         state.isLoading = false;
         state.error = "";
         state.camper = payload;
@@ -80,15 +87,16 @@ const campersSlice = createSlice({
       );
     },
     setFiltersAction: (state, { payload }) => {
-      state.filters.location = payload.location;
-      state.filters.equipment = payload.equipment;
-      state.filters.form = payload.form;
+      state.filters = payload;
+      state.filtersInitialized = true;
     },
 
     clearFiltersAction: (state) => {
-      state.filters.location = "";
-      state.filters.equipment = [];
-      state.filters.form = "";
+      state.filters = {};
+      state.filtersInitialized = true;
+    },
+    setCurrentPageAction: (state, { payload }) => {
+      state.currentPage = Number(payload);
     },
   },
 });

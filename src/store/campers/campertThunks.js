@@ -5,32 +5,16 @@ import { ITEMS_PER_PAGE } from "../../constants/uiConstants";
 export const fetchCampersThunk = createAsyncThunk(
   "campers/fetchAll",
   async (options = {}, { rejectWithValue }) => {
+    console.log("🚀 ~ options:", options);
     try {
       const { page = 1, params = {} } = options;
-      const { location, form, equipment = [] } = params;
 
-      const equipmentMap = equipment.reduce((acc, key) => {
-        if (key === "Automatic") {
-          acc.transmission = "automatic";
-        } else if (["AC", "TV"].includes(key)) {
-          acc[key] = true;
-        } else if (["Kitchen", "Bathroom"].includes(key)) {
-          acc[key.toLowerCase()] = true;
-        }
-        return acc;
-      }, {});
+      const { items, total } = await getCampers({ page, ...params });
 
-      const transformedParams = {
-        ...(location && { location }),
-        ...(form && { form }),
-        ...equipmentMap,
-      };
+      const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
+      const hasMore = page < totalPages;
 
-      const { items, total } = await getCampers({ page, ...transformedParams });
-
-      const hasMore = page * ITEMS_PER_PAGE < total;
-
-      return { items, page, hasMore };
+      return { items, page, hasMore, totalPages };
     } catch (error) {
       if (error.response?.status === 404) {
         return rejectWithValue("There are no campers for your request.");

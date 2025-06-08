@@ -1,40 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import sprite from "../../assets/icons/sprite.svg";
 import styles from "./CheckboxFilter.module.css";
 import clsx from "clsx";
 import { mapName } from "../../helpers/helpers";
 
-const CheckboxFilter = ({ onEquipmentChange, isCleared, setIsCleared }) => {
-  const [selectedEquipment, setSelectedEquipment] = useState([]);
-  const [prevSelectedEquipment, setPrevSelectedEquipment] = useState([]);
-
-  useEffect(() => {
-    const hasSelectedEquipmentChanged =
-      selectedEquipment.length !== prevSelectedEquipment.length ||
-      !selectedEquipment.every((element) =>
-        prevSelectedEquipment.includes(element)
-      );
-    if (hasSelectedEquipmentChanged) {
-      onEquipmentChange(selectedEquipment);
-      setPrevSelectedEquipment(selectedEquipment);
-    }
-  }, [selectedEquipment, prevSelectedEquipment, onEquipmentChange]);
-
+const CheckboxFilter = ({
+  onEquipmentChange,
+  isCleared,
+  setIsCleared,
+  value = [],
+}) => {
   useEffect(() => {
     if (isCleared) {
-      setSelectedEquipment([]);
-      setPrevSelectedEquipment([]);
       setIsCleared(false);
     }
   }, [isCleared, setIsCleared]);
 
   const handleCheckboxChange = (equipment) => {
-    setSelectedEquipment((prev) => {
-      const newSelectedEquipment = prev.includes(equipment)
-        ? prev.filter((item) => item !== equipment)
-        : [...prev, equipment];
-      return newSelectedEquipment;
-    });
+    console.log("🚀 ~ equipment:", equipment);
+    const newValue = value.includes(equipment)
+      ? value.filter((item) => item !== equipment)
+      : [...value, equipment];
+
+    onEquipmentChange(newValue);
   };
 
   const createCheckbox = (equipment) => (
@@ -43,7 +31,7 @@ const CheckboxFilter = ({ onEquipmentChange, isCleared, setIsCleared }) => {
         type="checkbox"
         id={equipment}
         className={styles.input}
-        checked={selectedEquipment.includes(equipment)}
+        checked={value.includes(equipment)}
         onChange={() => handleCheckboxChange(equipment)}
       />
       <label htmlFor={equipment} className={styles.label}>
@@ -51,7 +39,7 @@ const CheckboxFilter = ({ onEquipmentChange, isCleared, setIsCleared }) => {
           className={clsx(
             styles.customInput,
             styles[mapName(equipment)],
-            selectedEquipment.includes(equipment) && styles.customInputSelected
+            value.includes(equipment) && styles.customInputSelected
           )}
         >
           <svg className={styles.icon}>

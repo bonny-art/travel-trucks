@@ -10,6 +10,19 @@
   display: flex;
   flex-direction: column;
   gap: 28px;
+
+  position: relative;
+}
+
+.buttonWrapper {
+  position: absolute;
+  top: 0;
+  right: 2px;
+}
+
+.icon {
+  width: 9px;
+  height: 24px;
 }
 
 .content {

@@ -1,96 +1,45 @@
-import { useEffect, useState } from "react";
 import sprite from "../../assets/icons/sprite.svg";
 import styles from "./RadioFilter.module.css";
 import clsx from "clsx";
 
-const RadioFilter = ({ onFormChange, isCleared, setIsCleared }) => {
-  const [selectedValue, setSelectedValue] = useState("");
-
-  useEffect(() => {
-    if (isCleared) {
-      setSelectedValue("");
-      setIsCleared(false);
-    }
-  }, [isCleared, setIsCleared]);
-
+const RadioFilter = ({ onFormChange, value = "" }) => {
   const handleChange = (event) => {
-    setSelectedValue(event.target.value);
     onFormChange(event.target.value);
   };
 
+  const createRadio = (formValue, label) => (
+    <div key={formValue} className={styles.wrapper}>
+      <input
+        id={formValue}
+        type="radio"
+        value={formValue}
+        name="formFilter"
+        onChange={handleChange}
+        checked={value === formValue}
+        className={styles.input}
+      />
+      <label htmlFor={formValue} className={styles.label}>
+        <span
+          className={clsx(
+            styles.customInput,
+            styles[label.toLowerCase().replace(" ", "-")],
+            { [styles.selected]: value === formValue }
+          )}
+        >
+          <svg className={styles.icon}>
+            <use href={`${sprite}#${formValue}`} />
+          </svg>
+          <p>{label}</p>
+        </span>
+      </label>
+    </div>
+  );
+
   return (
     <form className={styles.form}>
-      <div className={styles.wrapper}>
-        <input
-          id="van"
-          type="radio"
-          value="Van"
-          name="formFilter"
-          onChange={handleChange}
-          checked={selectedValue === "Van"}
-          className={styles.input}
-        />
-        <label htmlFor="van" className={styles.label}>
-          <span
-            className={clsx(styles.customInput, styles.van, {
-              [styles.selected]: selectedValue === "Van",
-            })}
-          >
-            <svg className={styles.icon}>
-              <use href={`${sprite}#camper-van`} />
-            </svg>
-            <p>Van</p>
-          </span>
-        </label>
-      </div>
-
-      <div className={styles.wrapper}>
-        <input
-          id="fully-integrated"
-          type="radio"
-          value="Fully Integrated"
-          name="formFilter"
-          onChange={handleChange}
-          checked={selectedValue === "Fully Integrated"}
-          className={styles.input}
-        />
-        <label htmlFor="fully-integrated" className={styles.label}>
-          <span
-            className={clsx(styles.customInput, styles["fully-integrated"], {
-              [styles.selected]: selectedValue === "Fully Integrated",
-            })}
-          >
-            <svg className={styles.icon}>
-              <use href={`${sprite}#camper-fully-integrated`} />
-            </svg>
-            <p>Fully Integrated</p>
-          </span>
-        </label>
-      </div>
-
-      <div className={styles.wrapper}>
-        <input
-          id="alcove"
-          type="radio"
-          value="Alcove"
-          name="formFilter"
-          onChange={handleChange}
-          checked={selectedValue === "Alcove"}
-          className={styles.input}
-        />
-        <label htmlFor="alcove" className={styles.label}>
-          <span
-            className={clsx(styles.customInput, styles.alcove, {
-              [styles.selected]: selectedValue === "Alcove",
-            })}
-          >
-            <svg className={styles.icon}>
-              <use href={`${sprite}#camper-alcove`} />
-            </svg>
-            <p>Alcove</p>
-          </span>
-        </label>
-      </div>
+      {createRadio("panelTruck", "Van")}
+      {createRadio("fullyIntegrated", "Fully Integrated")}
+      {createRadio("alcove", "Alcove")}
     </form>
   );
 };

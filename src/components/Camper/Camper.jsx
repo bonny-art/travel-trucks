@@ -6,7 +6,7 @@ import {
 } from "../../store/campers/campersSlice";
 
 import styles from "./Camper.module.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Loader from "../Loader/Loader";
 import Message from "../Message/Message";
 import { TitleInfo } from "../TitleInfo/TitleInfo";
@@ -15,24 +15,27 @@ import { Features } from "../Features/Features";
 import ReviewsList from "../ReviewsList/ReviewsList";
 import clsx from "clsx";
 import { BookingForm } from "../BookingForm/BookingForm";
+import Button from "../Button/Button";
+import sprite from "../../assets/icons/sprite.svg";
+import { useLocation } from "react-router-dom";
 
 const Camper = () => {
   const camper = useSelector(selectCurrentCamper);
-  console.log("🚀 ~ camper:", camper);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
-  const [activeTab, setActiveTab] = useState("Features");
+  const currentLocation = useLocation();
 
-  if (isLoading) return <Loader />;
-  if (error) return <Message>{error}</Message>;
-  if (!camper) return null;
+  const backLocationRef = useRef(currentLocation.state?.from ?? "/catalog");
+
+  const [activeTab, setActiveTab] = useState("Features");
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
 
   const {
+    id,
     name,
     price,
     rating,
@@ -58,10 +61,27 @@ const Camper = () => {
     microwave,
   } = camper;
 
+  if (isLoading) return <Loader />;
+  if (error) return <Message>{error}</Message>;
+  if (!camper) return null;
+
   return (
     <section className={styles.section}>
       <div className={styles.container}>
         <TitleInfo camper={{ name, price, rating, reviews, location }} />
+
+        <div className={styles.buttonWrapper}>
+          <Button
+            className="transparent"
+            to={backLocationRef.current}
+            state={{ from: currentLocation, scrollToId: id }}
+          >
+            <svg className={styles.icon}>
+              <use href={`${sprite}#arrow-left`} />
+            </svg>
+            Back
+          </Button>
+        </div>
 
         <div className={styles.content}>
           <GeneralInfo camper={{ name, description, gallery }} />

@@ -1,12 +1,15 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { fetchCamperByIdThunk } from "../store/campers/campertThunks";
 
 import Camper from "../components/Camper/Camper";
+import { selectCurrentCamper } from "../store/campers/campersSlice";
 
 const CamperPage = () => {
+  const camper = useSelector(selectCurrentCamper);
+
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -16,7 +19,7 @@ const CamperPage = () => {
     }
   }, [dispatch, id]);
 
-  return <Camper />;
+  if (camper) return <Camper />;
 };
 
 export default CamperPage;

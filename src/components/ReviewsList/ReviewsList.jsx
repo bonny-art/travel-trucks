@@ -3,8 +3,6 @@ import ReviewsCard from "../ReviewsCard/ReviewsCard";
 import styles from "./ReviewsList.module.css";
 
 const ReviewsList = ({ reviews }) => {
-  console.log("🚀 ~ reviews:", reviews);
-
   return (
     <ul className={styles.reviewsContainer}>
       {reviews.length ? (

@@ -1,21 +1,10 @@
-import { useEffect, useState } from "react";
 import sprite from "../../assets/icons/sprite.svg";
 import styles from "./LocationInput.module.css";
+import { toTitleCase } from "../../helpers/helpers";
 
-const LocationInput = ({ onLocationSelect, isCleared, setIsCleared }) => {
-  const [userInput, setUserInput] = useState("");
-
-  useEffect(() => {
-    if (isCleared) {
-      setUserInput("");
-      setIsCleared(false);
-    }
-  }, [isCleared, setIsCleared]);
-
+const LocationInput = ({ onLocationSelect, value }) => {
   const handleInputChange = (e) => {
-    const input = e.target.value;
-    setUserInput(input);
-    onLocationSelect(input);
+    onLocationSelect(e.target.value);
   };
 
   return (
@@ -23,7 +12,7 @@ const LocationInput = ({ onLocationSelect, isCleared, setIsCleared }) => {
       <input
         type="text"
         onChange={handleInputChange}
-        value={userInput}
+        value={toTitleCase(value)}
         placeholder="City"
         className={styles.input}
       />
