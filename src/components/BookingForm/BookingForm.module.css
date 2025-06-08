@@ -221,10 +221,14 @@
 }
 
 .weekdays {
+  display: flex;
+  justify-content: space-between;
+
   width: 252px;
 }
 
 .weekday {
+  width: 36px;
   max-width: 36px;
   padding: 0;
 
@@ -242,6 +246,9 @@
 
 .weeks {
   width: 252px;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 4px;
 }
 
 .week {
@@ -253,15 +260,14 @@
   max-width: 36px;
   min-width: 36px;
 
-  border-radius: 50%;
+  height: 32px !important;
+  max-height: 32px !important;
+
+  border-radius: 32px;
 
   font-size: 14px;
 
   transition: background-color var(--transition);
-}
-
-.week:not(:last-child) .day {
-  padding-bottom: 4px;
 }
 
 .day:hover {
@@ -274,17 +280,23 @@
 
 .dayButton {
   width: 100%;
-  height: 100%;
-  height: 32px;
+  height: 32px !important;
+  max-height: 32px !important;
 }
 
 .today {
   background-color: var(--color-lightBlue);
+
+  height: 32px !important;
+  max-height: 32px !important;
 }
 
 .selected {
   background-color: var(--color-gray);
   color: white !important;
+
+  height: 32px !important;
+  max-height: 32px !important;
 }
 
 .buttonWrapper {

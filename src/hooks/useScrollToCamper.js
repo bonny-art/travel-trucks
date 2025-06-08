@@ -6,7 +6,7 @@ import {
   selectIsLoading,
 } from "../store/campers/campersSlice";
 
-export const scrollToCamperById = (id) => {
+const scrollToCamperById = (id) => {
   const element = document.getElementById(`camper-${id}`);
   if (element) {
     element.scrollIntoView({ behavior: "smooth", block: "center" });

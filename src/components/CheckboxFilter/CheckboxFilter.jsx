@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import sprite from "../../assets/icons/sprite.svg";
 import styles from "./CheckboxFilter.module.css";
 import clsx from "clsx";
-import { mapName } from "../../helpers/helpers";
+import { mapName } from "../../utils/mapping";
 
 const CheckboxFilter = ({
   onEquipmentChange,

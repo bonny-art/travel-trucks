@@ -5,7 +5,6 @@ import LocationInput from "../LocationInput/LocationInput";
 import CheckboxFilter from "../CheckboxFilter/CheckboxFilter";
 import RadioFilter from "../RadioFilter/RadioFilter";
 import Button from "../Button/Button";
-import { mapName } from "../../helpers/helpers";
 import {
   campersActions,
   selectFilters,
@@ -14,6 +13,7 @@ import {
   transformFiltersToPlainObject,
   transformFiltersToVolumeObject,
 } from "../../helpers/transformFilters";
+import { mapName } from "../../utils/mapping";
 
 const SideBar = () => {
   const dispatch = useDispatch();
