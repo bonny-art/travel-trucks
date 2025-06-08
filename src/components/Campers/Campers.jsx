@@ -53,13 +53,11 @@ const Campers = () => {
       const finalPage = targetPage > totalPages ? 1 : targetPage;
 
       if (finalPage > 1) {
-        const fetchPromises = [];
         for (let page = 2; page <= finalPage; page += 1) {
-          fetchPromises.push(
-            dispatch(fetchCampersThunk({ page, params: filter }))
+          await dispatch(
+            fetchCampersThunk({ page, params: filter, from: `Page ${page}` })
           );
         }
-        await Promise.all(fetchPromises);
       }
 
       dispatch(campersActions.setCurrentPageAction(finalPage));
