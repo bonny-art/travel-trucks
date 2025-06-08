@@ -14,6 +14,7 @@ export const selectTotalPages = (state) => state.campers.totalPages;
 export const selectHasMore = (state) => state.campers.hasMore;
 
 export const selectCurrentCamper = (state) => state.campers.camper;
+export const selectCurrentCamperId = (state) => state.campers.camperId;
 
 const initialState = {
   items: [],
@@ -23,6 +24,7 @@ const initialState = {
   currentPage: 1,
   totalPages: 0,
   hasMore: true,
+  camperId: "",
   camper: null,
   filters: {},
   filtersInitialized: false,
@@ -106,6 +108,10 @@ const campersSlice = createSlice({
     },
     resetCamperState: (state) => {
       state.camper = null;
+      state.camperId = "";
+    },
+    setCamperId: (state, { payload }) => {
+      state.camperId = payload;
     },
   },
 });

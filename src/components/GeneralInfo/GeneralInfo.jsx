@@ -15,14 +15,6 @@ export const GeneralInfo = ({ camper }) => {
             />
           </div>
         ))}
-        {/* //todo: delete after styles correction */}
-        <div className={styles.slide}>
-          <img
-            src={gallery[0].thumb}
-            alt={`${gallery[0].name} 4`}
-            className={styles.imageSlide}
-          />
-        </div>
       </div>
 
       <p className={styles.description}>{description}</p>
