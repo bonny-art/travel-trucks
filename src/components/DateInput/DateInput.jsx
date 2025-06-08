@@ -3,7 +3,7 @@ import { useField } from "formik";
 import { DayPicker, defaultLocale } from "react-day-picker";
 import { format, isBefore, startOfDay } from "date-fns";
 
-import styles from "../BookingForm/BookingForm.module.css";
+import styles from "./DateInput.module.css";
 
 const customLocale = {
   ...defaultLocale,
@@ -17,7 +17,7 @@ const customLocale = {
   },
 };
 
-const today = () => startOfDay(new Date());
+const today = startOfDay(new Date());
 
 const DateInput = ({ name }) => {
   const [field, meta, helpers] = useField(name);
@@ -37,7 +37,7 @@ const DateInput = ({ name }) => {
   const handleSelect = (date) => {
     if (!date) return;
     helpers.setTouched(true);
-    if (isBefore(startOfDay(date), today())) {
+    if (isBefore(startOfDay(date), today)) {
       helpers.setError("Select a date starting from today");
       return;
     }
@@ -63,7 +63,7 @@ const DateInput = ({ name }) => {
             navLayout="around"
             showOutsideDays
             onSelect={handleSelect}
-            fromDate={today()}
+            fromDate={today}
             weekStartsOn={1}
             locale={customLocale}
             className={styles.dayPicker}

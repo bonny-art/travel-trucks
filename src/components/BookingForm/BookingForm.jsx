@@ -1,12 +1,16 @@
 import { Formik, Field } from "formik";
 import * as Yup from "yup";
-import styles from "./BookingForm.module.css";
+import { startOfDay } from "date-fns";
+
 import Button from "../Button/Button";
 import DateInput from "../DateInput/DateInput";
-import { startOfDay } from "date-fns";
+
 import { showSuccessToast } from "../../notifications/showToast";
 
-const today = () => startOfDay(new Date());
+import styles from "./BookingForm.module.css";
+import FormField from "../FormField/FormField";
+
+const today = startOfDay(new Date());
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
@@ -14,25 +18,25 @@ const validationSchema = Yup.object().shape({
     .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Enter a valid email address")
     .required("Email is required"),
   bookingDate: Yup.date()
-    .min(today(), "Select a date starting from today")
+    .min(today, "Select a date starting from today")
     .required("Booking date is required"),
   comment: Yup.string(),
 });
 
+const initialValues = {
+  name: "",
+  email: "",
+  bookingDate: null,
+  comment: "",
+};
+
+const successTitle = "Message send successfully!";
+const successMessage = "Our manager will contact you shortly!";
+
 export const BookingForm = () => {
-  const initialValues = {
-    name: "",
-    email: "",
-    bookingDate: null,
-    comment: "",
-  };
-
-  const title = "Message send successfully!";
-  const message = "Our manager will contact you shortly!";
-
-  const handleSubmit = async (values, actions) => {
+  const handleSubmit = (values, actions) => {
     console.log(values);
-    showSuccessToast(title, message);
+    showSuccessToast(successTitle, successMessage);
     actions.setSubmitting(false);
     actions.resetForm();
   };
@@ -52,45 +56,29 @@ export const BookingForm = () => {
         {(formik) => (
           <form className={styles.formStyled} onSubmit={formik.handleSubmit}>
             <div className={styles.inputs}>
-              <div className={styles.fieldWrapper}>
-                <Field
-                  name="name"
-                  placeholder="Name*"
-                  className={styles.fieldStyled}
-                />
-                {formik.touched.name && formik.errors.name && (
-                  <div className={styles.errorStyled}>{formik.errors.name}</div>
-                )}
-              </div>
+              <FormField
+                name="name"
+                placeholder="Name*"
+                error={formik.errors.name}
+                touched={formik.touched.name}
+              />
 
-              <div className={styles.fieldWrapper}>
-                <Field
-                  name="email"
-                  placeholder="Email*"
-                  className={styles.fieldStyled}
-                />
-                {formik.touched.email && formik.errors.email && (
-                  <div className={styles.errorStyled}>
-                    {formik.errors.email}
-                  </div>
-                )}
-              </div>
+              <FormField
+                name="email"
+                placeholder="Email*"
+                error={formik.errors.email}
+                touched={formik.touched.email}
+              />
 
               <DateInput name="bookingDate" />
 
-              <div className={styles.fieldWrapper}>
-                <Field
-                  name="comment"
-                  placeholder="Comment"
-                  as="textarea"
-                  className={styles.fieldStyledComment}
-                />
-                {formik.touched.comment && formik.errors.comment && (
-                  <div className={styles.errorStyled}>
-                    {formik.errors.comment}
-                  </div>
-                )}
-              </div>
+              <FormField
+                name="comment"
+                placeholder="Comment"
+                isTextarea
+                error={formik.errors.comment}
+                touched={formik.touched.comment}
+              />
             </div>
 
             <div className={styles.buttonWrapper}>
