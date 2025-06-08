@@ -1,15 +1,11 @@
 .container {
   width: 380px;
-  /* position: -webkit-sticky;
-  position: sticky;
-  top: 114px;
-  overflow-y: auto; */
 }
 
-.filtersBox {
+.allFiltersBox {
   display: flex;
   flex-direction: column;
-  gap: 64px;
+  gap: 40px;
   max-height: calc(100vh - 279px);
 
   position: -webkit-sticky;
@@ -20,7 +16,7 @@
 .filters {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 40px;
   width: 372px;
 
   overflow-y: auto;
@@ -49,20 +45,40 @@
   color: var(--color-blackTransp06);
 }
 
-.bigFilterBox {
+.filtersBox {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 32px;
+}
+
+.equipmentBox {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 
   width: 360px;
 }
 
-.bigFilterBox h3 {
+.equipmentBox h3 {
   font-weight: 500;
   color: var(--color-gray);
 }
 
 .filterBox {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  width: 360px;
+}
+
+.filterTitle h4 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.vehicleBox {
   display: flex;
   flex-direction: column;
   gap: 24px;

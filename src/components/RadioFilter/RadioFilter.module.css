@@ -13,20 +13,6 @@
   user-select: none;
 }
 
-.wrapper .van {
-  width: 100px;
-}
-
-.wrapper .fully-integrated {
-  width: 128px;
-  padding-left: 24px;
-  padding-right: 24px;
-}
-
-.wrapper .alcove {
-  width: 112px;
-}
-
 .input {
   position: absolute;
   width: 1px;
@@ -47,15 +33,20 @@
 .customInput {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 8px;
   justify-content: center;
   align-items: center;
+
+  width: 112px;
+  height: 96px;
+
   border: 1px solid var(--color-blackTransp02);
   border-radius: 10px;
-  transition: border-color var(--transition);
-  height: 95px;
+
   cursor: pointer;
   user-select: none;
+
+  transition: border-color var(--transition);
 }
 
 .customInput p {
@@ -72,6 +63,6 @@
 }
 
 .icon {
-  width: 40px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
 }

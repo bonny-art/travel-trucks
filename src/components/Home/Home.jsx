@@ -11,7 +11,7 @@ const Home = () => {
             You can find everything you want in our catalog
           </h2>
         </div>
-        <Button className="orange" to="/catalog">
+        <Button style="orange" width="173" to="/catalog">
           View Now
         </Button>
       </div>

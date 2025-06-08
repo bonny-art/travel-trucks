@@ -6,7 +6,7 @@
   width: 641px;
   border: 1px solid var(--color-blackTransp02);
   border-radius: 10px;
-  padding: 24px;
+  padding: 44px 57px;
 }
 
 .title {
@@ -19,6 +19,8 @@
   font-weight: 600;
   font-size: 20px;
   line-height: 1.2;
+
+  color: var(--Main, #101828);
 }
 
 .title p {
@@ -46,17 +48,24 @@
   border: none;
   border-radius: 10px;
   padding: 18px;
-  width: 400px;
+  width: 527px;
   background: var(--color-lightGray);
+
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+
+  line-height: 1.5; /* 150% */
 }
 
 .fieldStyled {
-  height: 56px;
+  height: 60px;
 }
 
 .fieldStyledComment {
-  height: 114px;
+  height: 118px;
   resize: none;
+  display: block;
 }
 
 .errorStyled {
@@ -276,4 +285,9 @@
 .selected {
   background-color: var(--color-gray);
   color: white !important;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
 }

@@ -102,7 +102,7 @@ const Campers = () => {
 
           {hasMore && !isLoading && (
             <div className={styles.buttonBox}>
-              <Button className="transparent" onClick={handleLoadMore}>
+              <Button style="transparent" width="145" onClick={handleLoadMore}>
                 Load more
               </Button>
             </div>

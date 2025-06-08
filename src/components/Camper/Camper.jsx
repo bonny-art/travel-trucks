@@ -72,7 +72,8 @@ const Camper = () => {
 
         <div className={styles.buttonWrapper}>
           <Button
-            className="transparent"
+            style="transparent"
+            width="145"
             to={backLocationRef.current}
             state={{ from: currentLocation, scrollToId: id }}
           >

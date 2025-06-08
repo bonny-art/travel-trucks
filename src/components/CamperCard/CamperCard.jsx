@@ -174,7 +174,8 @@ const CamperCard = ({ camper }) => {
 
           <div>
             <Button
-              className="orange"
+              style="orange"
+              width="166"
               to={`/catalog/${id}`}
               state={{ from: currentLocation }}
             >

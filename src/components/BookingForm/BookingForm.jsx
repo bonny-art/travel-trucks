@@ -93,8 +93,8 @@ export const BookingForm = () => {
               </div>
             </div>
 
-            <div>
-              <Button type="submit" className="orange">
+            <div className={styles.buttonWrapper}>
+              <Button type="submit" style="orange" width="166">
                 Send
               </Button>
             </div>

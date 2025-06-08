@@ -78,7 +78,7 @@ const SideBar = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.filtersBox}>
+      <div className={styles.allFiltersBox}>
         <div className={styles.filters}>
           <div className={styles.locationBox}>
             <h3>Location</h3>
@@ -88,32 +88,33 @@ const SideBar = () => {
             />
           </div>
 
-          <div className={styles.bigFilterBox}>
-            <h3>Filters</h3>
+          <div className={styles.filtersBox}>
+            <div className={styles.equipmentBox}>
+              <h3>Filters</h3>
+              <div className={styles.filterBox}>
+                <div className={styles.filterTitle}>
+                  <h4>Vehicle equipment</h4>
+                </div>
+                <CheckboxFilter
+                  value={equipment}
+                  onEquipmentChange={handleEquipmentChange}
+                />
+              </div>
+            </div>
             <div className={styles.filterBox}>
               <div className={styles.filterTitle}>
-                <h4>Vehicle equipment</h4>
+                <h4>Vehicle type</h4>
               </div>
-              <CheckboxFilter
-                value={equipment}
-                onEquipmentChange={handleEquipmentChange}
-              />
+              <RadioFilter value={form} onFormChange={handleFormChange} />
             </div>
-          </div>
-
-          <div className={styles.filterBox}>
-            <div className={styles.filterTitle}>
-              <h4>Vehicle type</h4>
-            </div>
-            <RadioFilter value={form} onFormChange={handleFormChange} />
           </div>
         </div>
 
         <div className={styles.buttonsBox}>
-          <Button className="orange" onClick={handleSearch}>
+          <Button style="orange" width="166" onClick={handleSearch}>
             Search
           </Button>
-          <Button className="transparent" onClick={handleClear}>
+          <Button style="transparent" width="145" onClick={handleClear}>
             Clear
           </Button>
         </div>
