@@ -1,43 +1,33 @@
-import styles from "./Button.module.css";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
+
+import styles from "./Button.module.css";
 
 const Button = ({
   children,
   onClick,
   type = "button",
-  style,
-  width,
+  style, // e.g., "orange", "transparent"
+  width, // number, px
   to,
   ...rest
 }) => {
-  const classes = clsx(
-    styles.button,
-    style && styles[style],
-    width && styles[width]
-  );
+  const inlineStyle = width ? { "--btn-width": `${width}px` } : undefined;
 
-  if (to) {
-    return (
-      <Link
-        to={to}
-        className={classes}
-        {...rest}
-        style={{ "--btn-width": `${width}px` }}
-      >
-        {children}
-      </Link>
-    );
-  }
+  const className = clsx(styles.button, style && styles[style]);
 
-  return (
-    <button
-      type={type}
-      onClick={onClick}
-      className={classes}
-      {...rest}
-      style={{ "--btn-width": `${width}px` }}
-    >
+  const commonProps = {
+    className,
+    style: inlineStyle,
+    ...rest,
+  };
+
+  return to ? (
+    <Link to={to} {...commonProps}>
+      {children}
+    </Link>
+  ) : (
+    <button type={type} onClick={onClick} {...commonProps}>
       {children}
     </button>
   );
