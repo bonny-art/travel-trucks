@@ -9,12 +9,9 @@ const Catalog = () => {
   return (
     <section className={styles.section}>
       <div className={styles.container}>
-        <div>
-          <SideBar />
-        </div>
-        <div>
-          <Campers />
-        </div>
+        <SideBar />
+
+        <Campers />
       </div>
     </section>
   );
