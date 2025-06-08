@@ -1,16 +1,23 @@
-import { selectFavoriteCampers } from "../../store/campers/campersSlice";
 import { useSelector } from "react-redux";
-import sprite from "../../assets/icons/sprite.svg";
-import styles from "./CamperCard.module.css";
 import { useLocation } from "react-router-dom";
+
 import Button from "../Button/Button";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
+
+import { selectFavoriteCampers } from "../../store/campers/campersSlice";
+
 import { capitalizeFirstLetter } from "../../utils/stringUtils";
 
-const CamperCard = ({ camper }) => {
-  const currentLocation = useLocation();
+import styles from "./CamperCard.module.css";
 
-  const endpoint = currentLocation.pathname.slice(1);
+import sprite from "../../assets/icons/sprite.svg";
+
+const CamperCard = ({ camper }) => {
+  const location = useLocation();
+  const favorites = useSelector(selectFavoriteCampers);
+
+  const isInFavorite = favorites.some((item) => item.id === camper.id);
+  const endpoint = location.pathname.slice(1);
 
   const {
     id,
@@ -18,11 +25,11 @@ const CamperCard = ({ camper }) => {
     price,
     rating,
     reviews,
-    location,
+    gallery,
+    location: camperLocation,
     description,
     transmission,
     engine,
-    gallery,
     AC,
     bathroom,
     kitchen,
@@ -33,158 +40,88 @@ const CamperCard = ({ camper }) => {
     water,
   } = camper;
 
-  const favoriteItems = useSelector(selectFavoriteCampers);
-  const isInFavorite = favoriteItems.some((item) => item.id === id);
+  const baseFeatures = [
+    transmission === "automatic" && {
+      icon: "transmission",
+      label: "Automatic",
+    },
+    engine && { icon: "engine", label: capitalizeFirstLetter(engine) },
+    AC && { icon: "ac", label: "AC" },
+    kitchen && { icon: "kitchen", label: "Kitchen" },
+    radio && { icon: "radio", label: "Radio" },
+    bathroom && { icon: "bathroom", label: "Bathroom" },
+    refrigerator && { icon: "refrigerator", label: "Refrigerator" },
+    microwave && { icon: "microwave", label: "Microwave" },
+    gas && { icon: "gas", label: "Gas" },
+    water && { icon: "water", label: "Water" },
+  ].filter(Boolean);
 
   return (
-    <>
-      <li className={styles.container} key={id} id={`camper-${id}`}>
-        <div
-          className={
-            endpoint === "favorites"
-              ? styles.imageBoxFavorites
-              : styles.imageBox
-          }
-        >
-          <img src={gallery[0].thumb} alt={name} />
-        </div>
+    <li className={styles.container} key={id} id={`camper-${id}`}>
+      <div
+        className={
+          endpoint === "favorites" ? styles.imageBoxFavorites : styles.imageBox
+        }
+      >
+        <img src={gallery[0].thumb} alt={name} />
+      </div>
 
-        <div
-          className={
-            endpoint === "favorites" ? styles.infoBoxFavorites : styles.infoBox
-          }
-        >
-          <div className={styles.head}>
-            <div className={styles.titleRow}>
-              <h2>{name}</h2>
-              <div>
-                <p>{`€${price.toFixed(2)}`}</p>
-                <FavoriteButton camper={camper} isInFavorite={isInFavorite} />
-              </div>
-            </div>
-
-            <div className={styles.attributesRow}>
-              <div className={styles.attributesItem}>
-                <svg className={styles.star}>
-                  <use href={`${sprite}#star`} />
-                </svg>
-                <p>{`${rating}(${reviews.length} Reviews)`}</p>
-              </div>
-
-              <div className={styles.attributesItem}>
-                <svg className={styles.map}>
-                  <use href={`${sprite}#map`} />
-                </svg>
-                <p>{location}</p>
-              </div>
+      <div
+        className={
+          endpoint === "favorites" ? styles.infoBoxFavorites : styles.infoBox
+        }
+      >
+        <div className={styles.head}>
+          <div className={styles.titleRow}>
+            <h2>{name}</h2>
+            <div>
+              <p>{`€${price.toFixed(2)}`}</p>
+              <FavoriteButton camper={camper} isInFavorite={isInFavorite} />
             </div>
           </div>
 
-          <p className={styles.description}>{description}</p>
-
-          <div className={styles.featuresContainer}>
-            {transmission === "automatic" && (
-              <div className={styles.label}>
-                <svg className={styles.icon}>
-                  <use xlinkHref={`${sprite}#transmission`}></use>
-                </svg>
-                <p>Automatic</p>
-              </div>
-            )}
-
-            <div className={styles.label}>
-              <svg className={styles.icon}>
-                <use xlinkHref={`${sprite}#engine`}></use>
+          <div className={styles.attributesRow}>
+            <div className={styles.attributesItem}>
+              <svg className={styles.star}>
+                <use href={`${sprite}#star`} />
               </svg>
-              <p>{capitalizeFirstLetter(engine)}</p>
+              <p>{`${rating} (${reviews.length} Reviews)`}</p>
             </div>
 
-            {AC && (
-              <div className={styles.label}>
-                <svg className={styles.icon}>
-                  <use xlinkHref={`${sprite}#ac`}></use>
-                </svg>
-                <p>AC</p>
-              </div>
-            )}
-
-            {kitchen && (
-              <div className={styles.label}>
-                <svg className={styles.icon}>
-                  <use xlinkHref={`${sprite}#kitchen`}></use>
-                </svg>
-                <p>Kitchen</p>
-              </div>
-            )}
-
-            {radio && (
-              <div className={styles.label}>
-                <svg className={styles.icon}>
-                  <use xlinkHref={`${sprite}#radio`}></use>
-                </svg>
-                <p>Radio</p>
-              </div>
-            )}
-
-            {bathroom && (
-              <div className={styles.label}>
-                <svg className={styles.icon}>
-                  <use xlinkHref={`${sprite}#bathroom`}></use>
-                </svg>
-                <p>Bathroom</p>
-              </div>
-            )}
-
-            {refrigerator && (
-              <div className={styles.label}>
-                <svg className={styles.icon}>
-                  <use xlinkHref={`${sprite}#refrigerator`}></use>
-                </svg>
-                <p>Rerefrigerator</p>
-              </div>
-            )}
-
-            {microwave && (
-              <div className={styles.label}>
-                <svg className={styles.icon}>
-                  <use xlinkHref={`${sprite}#microwave`}></use>
-                </svg>
-                <p>Microwave</p>
-              </div>
-            )}
-
-            {gas && (
-              <div className={styles.label}>
-                <svg className={styles.icon}>
-                  <use xlinkHref={`${sprite}#gas`}></use>
-                </svg>
-                <p>Gas</p>
-              </div>
-            )}
-
-            {water && (
-              <div className={styles.label}>
-                <svg className={styles.icon}>
-                  <use xlinkHref={`${sprite}#water`}></use>
-                </svg>
-                <p>Water</p>
-              </div>
-            )}
-          </div>
-
-          <div>
-            <Button
-              style="orange"
-              width="166"
-              to={`/catalog/${id}`}
-              state={{ from: currentLocation }}
-            >
-              Show more
-            </Button>
+            <div className={styles.attributesItem}>
+              <svg className={styles.map}>
+                <use href={`${sprite}#map`} />
+              </svg>
+              <p>{camperLocation}</p>
+            </div>
           </div>
         </div>
-      </li>
-    </>
+
+        <p className={styles.description}>{description}</p>
+
+        <div className={styles.featuresContainer}>
+          {baseFeatures.map(({ icon, label }) => (
+            <div key={icon} className={styles.label}>
+              <svg className={styles.icon}>
+                <use href={`${sprite}#${icon}`} />
+              </svg>
+              <p>{label}</p>
+            </div>
+          ))}
+        </div>
+
+        <div>
+          <Button
+            style="orange"
+            width="166"
+            to={`/catalog/${id}`}
+            state={{ from: location }}
+          >
+            Show more
+          </Button>
+        </div>
+      </div>
+    </li>
   );
 };
 
