@@ -1,4 +1,4 @@
-export const transformFiltersToPlainObject = (filters = {}) => {
+export const mapFilterFormToApiParams = (filters = {}) => {
   const { location, form, equipment = [] } = filters;
 
   const equipmentMap = equipment.reduce((acc, key) => {
@@ -19,7 +19,7 @@ export const transformFiltersToPlainObject = (filters = {}) => {
   };
 };
 
-export const transformFiltersToVolumeObject = (allParams) => {
+export const mapApiParamsToFilterFormWithPage = (allParams) => {
   const filters = {
     location: allParams.location || "",
     form: allParams.form || "",

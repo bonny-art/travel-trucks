@@ -1,10 +1,10 @@
 import { Formik, Field } from "formik";
 import * as Yup from "yup";
 import styles from "./BookingForm.module.css";
-import { toastSuccess } from "../../helpers/notifications";
 import Button from "../Button/Button";
 import DateInput from "../DateInput/DateInput";
 import { startOfDay } from "date-fns";
+import { showSuccessToast } from "../../notifications/showToast";
 
 const today = () => startOfDay(new Date());
 
@@ -32,7 +32,7 @@ export const BookingForm = () => {
 
   const handleSubmit = async (values, actions) => {
     console.log(values);
-    toastSuccess(title, message);
+    showSuccessToast(title, message);
     actions.setSubmitting(false);
     actions.resetForm();
   };

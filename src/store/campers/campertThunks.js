@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getCamperById, getCampers } from "../../api/campersApi";
-import { ITEMS_PER_PAGE } from "../../constants/uiConstants";
+import { ITEMS_PER_PAGE } from "../../constants/ui";
 
 export const fetchCampersThunk = createAsyncThunk(
   "campers/fetchAll",

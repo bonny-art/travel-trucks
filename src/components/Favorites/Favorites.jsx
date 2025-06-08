@@ -11,7 +11,7 @@ import {
   campersActions,
   selectFavoriteCampers,
 } from "../../store/campers/campersSlice";
-import { ITEMS_PER_PAGE } from "../../constants/uiConstants";
+import { ITEMS_PER_PAGE } from "../../constants/ui";
 
 const Favorites = () => {
   const dispatch = useDispatch();

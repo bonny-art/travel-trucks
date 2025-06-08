@@ -9,11 +9,11 @@ import {
   campersActions,
   selectFilters,
 } from "../../store/campers/campersSlice";
-import {
-  transformFiltersToPlainObject,
-  transformFiltersToVolumeObject,
-} from "../../helpers/transformFilters";
 import { mapName } from "../../utils/mapping";
+import {
+  mapApiParamsToFilterFormWithPage,
+  mapFilterFormToApiParams,
+} from "../../utils/filtersTransform";
 
 const SideBar = () => {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const SideBar = () => {
       location: locationFromStore = "",
       equipment: equipmentFromStore = [],
       form: formFromStore = "",
-    } = transformFiltersToVolumeObject(filtersInStore).filters;
+    } = mapApiParamsToFilterFormWithPage(filtersInStore).filters;
 
     setLocation(locationFromStore);
     setEquipment(equipmentFromStore);
@@ -57,7 +57,7 @@ const SideBar = () => {
       equipment,
     };
 
-    const payload = transformFiltersToPlainObject(filters);
+    const payload = mapFilterFormToApiParams(filters);
 
     const isSame = JSON.stringify(payload) === JSON.stringify(filtersInStore);
     if (isSame) return;

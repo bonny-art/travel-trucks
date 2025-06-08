@@ -4,9 +4,9 @@ import Catalog from "../components/Catalog/Catalog";
 import { useSearchParams } from "react-router-dom";
 import { campersActions } from "../store/campers/campersSlice";
 import {
-  transformFiltersToPlainObject,
-  transformFiltersToVolumeObject,
-} from "../helpers/transformFilters";
+  mapApiParamsToFilterFormWithPage,
+  mapFilterFormToApiParams,
+} from "../utils/filtersTransform";
 
 const CatalogPage = () => {
   const dispatch = useDispatch();
@@ -22,10 +22,10 @@ const CatalogPage = () => {
       return;
     }
 
-    const { filters, page } = transformFiltersToVolumeObject(allParams);
+    const { filters, page } = mapApiParamsToFilterFormWithPage(allParams);
 
     dispatch(
-      campersActions.setFiltersAction(transformFiltersToPlainObject(filters))
+      campersActions.setFiltersAction(mapFilterFormToApiParams(filters))
     );
     dispatch(campersActions.setCurrentPageAction(page));
   }, [dispatch, searchParams, setSearchParams]);

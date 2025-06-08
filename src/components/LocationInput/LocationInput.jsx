@@ -1,6 +1,6 @@
 import sprite from "../../assets/icons/sprite.svg";
+import { toTitleCase } from "../../utils/stringUtils";
 import styles from "./LocationInput.module.css";
-import { toTitleCase } from "../../helpers/helpers";
 
 const LocationInput = ({ onLocationSelect, value }) => {
   const handleInputChange = (e) => {
