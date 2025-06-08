@@ -5,7 +5,10 @@ import { useParams } from "react-router-dom";
 import { fetchCamperByIdThunk } from "../store/campers/campertThunks";
 
 import Camper from "../components/Camper/Camper";
-import { selectCurrentCamper } from "../store/campers/campersSlice";
+import {
+  campersActions,
+  selectCurrentCamper,
+} from "../store/campers/campersSlice";
 
 const CamperPage = () => {
   const camper = useSelector(selectCurrentCamper);
@@ -18,6 +21,12 @@ const CamperPage = () => {
       dispatch(fetchCamperByIdThunk(id));
     }
   }, [dispatch, id]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(campersActions.resetCamperState());
+    };
+  }, [dispatch]);
 
   if (camper) return <Camper />;
 };

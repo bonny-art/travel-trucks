@@ -30,6 +30,12 @@ const CatalogPage = () => {
     dispatch(campersActions.setCurrentPageAction(page));
   }, [dispatch, searchParams, setSearchParams]);
 
+  useEffect(() => {
+    return () => {
+      dispatch(campersActions.resetCampersState());
+    };
+  }, [dispatch]);
+
   return <Catalog />;
 };
 

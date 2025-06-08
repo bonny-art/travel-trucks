@@ -10,8 +10,8 @@ export const selectFilters = (state) => state.campers.filters;
 export const selectFiltersInitialized = (state) =>
   state.campers.filtersInitialized;
 
-export const selectHasMore = (state) => state.campers.hasMore;
 export const selectTotalPages = (state) => state.campers.totalPages;
+export const selectHasMore = (state) => state.campers.hasMore;
 
 export const selectCurrentCamper = (state) => state.campers.camper;
 
@@ -21,8 +21,8 @@ const initialState = {
   isLoading: false,
   error: "",
   currentPage: 1,
-  hasMore: true,
   totalPages: 0,
+  hasMore: true,
   camper: null,
   filters: {},
   filtersInitialized: false,
@@ -97,6 +97,16 @@ const campersSlice = createSlice({
     },
     setCurrentPageAction: (state, { payload }) => {
       state.currentPage = Number(payload);
+    },
+    resetCampersState: (state) => {
+      state.items = [];
+      state.totalPages = 0;
+      state.hasMore = true;
+      state.filters = {};
+      state.filtersInitialized = false;
+    },
+    resetCamperState: (state) => {
+      state.camper = null;
     },
   },
 });

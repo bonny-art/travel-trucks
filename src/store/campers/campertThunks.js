@@ -7,7 +7,8 @@ export const fetchCampersThunk = createAsyncThunk(
   async (options = {}, { rejectWithValue }) => {
     console.log("🚀 ~ options:", options);
     try {
-      const { page = 1, params = {} } = options;
+      const { page = 1, params = {}, from } = options;
+      console.log("🚀 ~ from:", from);
 
       const { items, total } = await getCampers({ page, ...params });
 

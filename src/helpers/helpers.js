@@ -24,6 +24,13 @@ export const scrollDown = () => {
   });
 };
 
+export const scrollUp = () => {
+  window.scroll({
+    top: 0,
+    behavior: "smooth",
+  });
+};
+
 export const getType = (form) => {
   if (form === "alcove") {
     return "Alcove";

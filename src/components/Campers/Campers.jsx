@@ -17,13 +17,14 @@ import Message from "../Message/Message";
 import Loader from "../Loader/Loader";
 import { fetchCampersThunk } from "../../store/campers/campertThunks";
 import { useSearchParams } from "react-router-dom";
+import { scrollUp } from "../../helpers/helpers";
 
 const Campers = () => {
   const campers = useSelector(selectCampers);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
-  const hasMore = useSelector(selectHasMore);
   const currentPage = useSelector(selectCurrentPage);
+  const hasMore = useSelector(selectHasMore);
   const filter = useSelector(selectFilters);
   const filtersInitialized = useSelector(selectFiltersInitialized);
 
@@ -32,58 +33,63 @@ const Campers = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const isFirstLoad = useRef(true);
-  const prevFiltersRef = useRef(filter);
-  const prevPageRef = useRef(currentPage);
+  const prevFiltersRef = useRef(JSON.stringify(filter));
 
   useEffect(() => {
-    if (!filtersInitialized) return;
+    if (!filtersInitialized) {
+      return;
+    }
+
+    const currentFiltersJSON = JSON.stringify(filter);
 
     const fetchPages = async (targetPage) => {
       const result = await dispatch(
-        fetchCampersThunk({ page: 1, params: filter })
+        fetchCampersThunk({ page: 1, params: filter, from: "Page 1" })
       );
 
+      if (!result.payload) return;
+
       const totalPages = result.payload.totalPages;
-      const isInvalidPage = targetPage > totalPages;
-      const finalPage = isInvalidPage ? 1 : targetPage;
+      const finalPage = targetPage > totalPages ? 1 : targetPage;
 
       if (finalPage > 1) {
+        const fetchPromises = [];
         for (let page = 2; page <= finalPage; page += 1) {
-          await dispatch(fetchCampersThunk({ page, params: filter }));
+          fetchPromises.push(
+            dispatch(
+              fetchCampersThunk({ page, params: filter, from: `Page ${page}` })
+            )
+          );
         }
-      } else {
-        dispatch(campersActions.setCurrentPageAction(1));
+        await Promise.all(fetchPromises);
       }
 
+      dispatch(campersActions.setCurrentPageAction(finalPage));
       setSearchParams({ page: finalPage, ...filter });
     };
 
     if (isFirstLoad.current) {
+      isFirstLoad.current = false;
       const pageFromParams = Number(searchParams.get("page")) || 1;
       fetchPages(pageFromParams);
-      isFirstLoad.current = false;
     } else {
-      if (
-        prevPageRef.current !== currentPage ||
-        prevFiltersRef.current !== filter
-      ) {
-        fetchPages(currentPage);
+      if (prevFiltersRef.current !== currentFiltersJSON) {
+        fetchPages(1);
+        scrollUp();
       }
     }
 
-    prevFiltersRef.current = filter;
-    prevPageRef.current = currentPage;
-  }, [
-    dispatch,
-    filter,
-    currentPage,
-    filtersInitialized,
-    searchParams,
-    setSearchParams,
-  ]);
+    prevFiltersRef.current = currentFiltersJSON;
+  }, [dispatch, filter, filtersInitialized, searchParams, setSearchParams]);
 
   const handleLoadMore = () => {
-    dispatch(campersActions.setCurrentPageAction(currentPage + 1));
+    const nextPage = currentPage + 1;
+
+    dispatch(campersActions.setCurrentPageAction(nextPage));
+    dispatch(
+      fetchCampersThunk({ page: nextPage, params: filter, from: "LoadMore" })
+    );
+    setSearchParams({ page: nextPage, ...filter });
   };
 
   return (
