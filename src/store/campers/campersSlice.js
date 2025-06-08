@@ -84,7 +84,7 @@ const campersSlice = createSlice({
     },
     removeFromFavoriteItemsAction: (state, { payload }) => {
       state.favoriteItems = state.favoriteItems.filter(
-        (camper) => camper._id !== payload
+        (camper) => camper.id !== payload
       );
     },
     setFiltersAction: (state, { payload }) => {

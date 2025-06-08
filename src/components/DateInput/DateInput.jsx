@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { useField } from "formik";
 import { DayPicker, defaultLocale } from "react-day-picker";
 import { format, isBefore, startOfDay } from "date-fns";
@@ -17,31 +17,37 @@ const customLocale = {
   },
 };
 
-const today = startOfDay(new Date());
-
 const DateInput = ({ name }) => {
   const [field, meta, helpers] = useField(name);
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef();
 
+  const today = useMemo(() => startOfDay(new Date()), []);
+
+  const handleClickOutside = useCallback((event) => {
+    if (ref.current && !ref.current.contains(event.target)) {
+      setIsOpen(false);
+    }
+  }, []);
+
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (ref.current && !ref.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  }, [handleClickOutside]);
 
   const handleSelect = (date) => {
     if (!date) return;
+
+    const selected = startOfDay(date);
+
     helpers.setTouched(true);
-    if (isBefore(startOfDay(date), today)) {
+
+    if (isBefore(selected, today)) {
       helpers.setError("Select a date starting from today");
       return;
     }
-    helpers.setValue(date);
+
+    helpers.setValue(selected);
     setIsOpen(false);
   };
 
@@ -55,6 +61,7 @@ const DateInput = ({ name }) => {
         onClick={() => setIsOpen((prev) => !prev)}
         className={styles.fieldStyled}
       />
+
       {isOpen && (
         <div ref={ref} className={styles.calendarWrapper}>
           <DayPicker
@@ -90,6 +97,7 @@ const DateInput = ({ name }) => {
           />
         </div>
       )}
+
       {meta.touched && meta.error && (
         <div className={styles.errorStyled}>{meta.error}</div>
       )}

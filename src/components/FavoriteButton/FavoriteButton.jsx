@@ -1,7 +1,9 @@
 import { useDispatch } from "react-redux";
-import sprite from "../../assets/icons/sprite.svg";
-import styles from "./FavoriteButton.module.css";
+
 import { campersActions } from "../../store/campers/campersSlice";
+
+import styles from "./FavoriteButton.module.css";
+import sprite from "../../assets/icons/sprite.svg";
 
 const FavoriteButton = ({ camper, isInFavorite }) => {
   const dispatch = useDispatch();
@@ -9,11 +11,11 @@ const FavoriteButton = ({ camper, isInFavorite }) => {
   const icon = isInFavorite ? "heart-pressed" : "heart";
 
   const handleFavoriteClick = () => {
-    if (isInFavorite) {
-      dispatch(campersActions.removeFromFavoriteItemsAction(camper._id));
-    } else {
-      dispatch(campersActions.addToFavoriteItemsAction(camper));
-    }
+    const action = isInFavorite
+      ? campersActions.removeFromFavoriteItemsAction(camper.id)
+      : campersActions.addToFavoriteItemsAction(camper);
+
+    dispatch(action);
   };
 
   return (
