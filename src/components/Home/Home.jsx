@@ -1,4 +1,5 @@
 import Button from "../Button/Button";
+
 import styles from "./Home.module.css";
 
 const Home = () => {

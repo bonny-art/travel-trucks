@@ -11,7 +11,7 @@ export const GeneralInfo = ({ camper }) => {
             <img
               src={thumb}
               alt={`${name} ${index + 1}`}
-              className={styles.imageSlide}
+              className={styles.image}
             />
           </div>
         ))}

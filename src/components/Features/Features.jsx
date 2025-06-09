@@ -1,7 +1,8 @@
+import { capitalizeFirstLetter, replaceUnits } from "../../utils/stringUtils";
+import { getType } from "../../utils/mapping";
+
 import styles from "./Features.module.css";
 import sprite from "../../assets/icons/sprite.svg";
-import { getType } from "../../utils/mapping";
-import { capitalizeFirstLetter } from "../../utils/stringUtils";
 
 export const Features = ({ camper }) => {
   const {
@@ -24,11 +25,18 @@ export const Features = ({ camper }) => {
   } = camper;
 
   const renderLabel = (icon, text, iconStroke = false) => (
-    <div className={styles.label}>
+    <div className={styles.label} key={icon}>
       <svg className={iconStroke ? styles.iconWithStroke : styles.icon}>
-        <use xlinkHref={`${sprite}#${icon}`} />
+        <use href={`${sprite}#${icon}`} />
       </svg>
       <p>{text}</p>
+    </div>
+  );
+
+  const renderDetailsItem = (label, value) => (
+    <div className={styles.item} key={label}>
+      <p>{label}</p>
+      <p>{value}</p>
     </div>
   );
 
@@ -54,30 +62,12 @@ export const Features = ({ camper }) => {
         </div>
 
         <div className={styles.list}>
-          <div className={styles.item}>
-            <p>Form</p>
-            <p>{getType(form)}</p>
-          </div>
-          <div className={styles.item}>
-            <p>Length</p>
-            <p>{length.replace(/(\d)([a-zA-Z])/g, "$1 $2")}</p>
-          </div>
-          <div className={styles.item}>
-            <p>Width</p>
-            <p>{width.replace(/(\d)([a-zA-Z])/g, "$1 $2")}</p>
-          </div>
-          <div className={styles.item}>
-            <p>Height</p>
-            <p>{height.replace(/(\d)([a-zA-Z])/g, "$1 $2")}</p>
-          </div>
-          <div className={styles.item}>
-            <p>Tank</p>
-            <p>{tank.replace(/(\d)([a-zA-Z])/g, "$1 $2")}</p>
-          </div>
-          <div className={styles.item}>
-            <p>Consumption</p>
-            <p>{consumption}</p>
-          </div>
+          {renderDetailsItem("Form", getType(form))}
+          {renderDetailsItem("Length", replaceUnits(length))}
+          {renderDetailsItem("Width", replaceUnits(width))}
+          {renderDetailsItem("Height", replaceUnits(height))}
+          {renderDetailsItem("Tank", replaceUnits(tank))}
+          {renderDetailsItem("Consumption", consumption)}
         </div>
       </div>
     </div>

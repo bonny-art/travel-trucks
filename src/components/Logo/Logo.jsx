@@ -1,15 +1,14 @@
 import { Link } from "react-router-dom";
-import sprite from "../../assets/icons/sprite.svg";
-import styles from "./Logo.module.css";
 
-const Logo = () => {
-  return (
-    <Link to="/" className={styles.link}>
-      <svg className={styles.icon}>
-        <use href={`${sprite}#logo`} />
-      </svg>
-    </Link>
-  );
-};
+import styles from "./Logo.module.css";
+import sprite from "../../assets/icons/sprite.svg";
+
+const Logo = () => (
+  <Link to="/" className={styles.link} aria-label="Home">
+    <svg className={styles.icon}>
+      <use href={`${sprite}#logo`} />
+    </svg>
+  </Link>
+);
 
 export default Logo;

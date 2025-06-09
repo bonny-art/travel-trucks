@@ -4,7 +4,7 @@
   padding: 200px 0;
 }
 
-.messageBox p {
+.text {
   text-align: center;
   color: var(--color-gray);
 }

@@ -1,6 +1,7 @@
-import sprite from "../../assets/icons/sprite.svg";
 import { toTitleCase } from "../../utils/stringUtils";
+
 import styles from "./LocationInput.module.css";
+import sprite from "../../assets/icons/sprite.svg";
 
 const LocationInput = ({ onLocationSelect, value }) => {
   const handleInputChange = (e) => {
@@ -14,6 +15,7 @@ const LocationInput = ({ onLocationSelect, value }) => {
         onChange={handleInputChange}
         value={toTitleCase(value)}
         placeholder="City"
+        aria-label="City"
         className={styles.input}
       />
       <svg className={styles.icon}>
