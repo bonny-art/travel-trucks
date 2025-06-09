@@ -1,7 +1,10 @@
-import Layout from "../Layout/Layout";
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
+
+import Layout from "../Layout/Layout";
 import Loader from "../Loader/Loader";
+
+import styles from "./App.module.css";
 
 const HomePage = lazy(() => import("../../pages/HomePage"));
 const CatalogPage = lazy(() => import("../../pages/CatalogPage"));
@@ -10,7 +13,13 @@ const FavoritesPage = lazy(() => import("../../pages/FavoritesPage"));
 
 const App = () => {
   return (
-    <Suspense fallback={<Loader />}>
+    <Suspense
+      fallback={
+        <div className={styles.loaderWrapper}>
+          <Loader />
+        </div>
+      }
+    >
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
