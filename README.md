@@ -1,12 +1,87 @@
-# React + Vite
+<h1 align="center">TravelTrucks</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="center">
+  <img src="public/cover.jpg" alt="TravelTrucks cover image" />
+</p>
 
-Currently, two official plugins are available:
+<p>
+  A web-based campervan rental app offers significant value to users looking for a convenient and efficient way to plan their trips.
+</p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<br/>
 
-## Expanding the ESLint configuration
+<h3>🌟 Features</h3>
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+<h6>Intuitive catalog:</h6>
+<p>
+  Users can easily browse through a variety of campers using filters by location, type, and equipment, allowing them to quickly find the perfect fit.
+</p>
+
+<h6>Personalization:</h6>
+<p>
+  The ability to add campers to a favorite list helps users save and organize the options they are most interested in for easy access in the future.
+</p>
+
+<h6>Detailed information:</h6>
+<p>
+  Detailed campervan descriptions with photos and specifications allow users to dive deeper into the details to make an informed decision.
+</p>
+
+<h6>Ease of booking:</h6>
+<p>
+  With the ability to send booking requests directly through the app, the booking process becomes quick and hassle-free.
+</p>
+
+<h6>Convenience and time saving:</h6>
+<p>
+  Everything from searching to booking can be done in one place, which saves users time and effort.
+</p>
+
+<p>
+  These features make the web app not only a useful tool for travel planning, but also provide a pleasant user experience, encouraging customer return.
+</p>
+
+<br/>
+
+<h3>🚀 Getting Started</h3>
+
+<p>To run the project locally, follow these steps:</p>
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/bonny-art/travel-trucks.git
+
+# 2. Navigate to the project folder
+cd travel-trucks
+
+# 3. Install dependencies
+npm install
+
+# 4. Run the development server
+npm run dev
+```
+
+<p>Open your browser and navigate to <a href="http://localhost:5173" target="_blank">http://localhost:5173</a></p>
+
+<br/>
+
+<h3>🧰 Tools and technologies</h3>
+
+<div align="center">
+  <code><img width="50" src="https://user-images.githubusercontent.com/25181517/192108372-f71d70ac-7ae6-4c0d-8395-51d8870c2ef0.png" alt="Git" title="Git"/></code>
+  <code><img width="50" src="https://user-images.githubusercontent.com/25181517/192108374-8da61ba1-99ec-41d7-80b8-fb2f7c0a4948.png" alt="GitHub" title="GitHub"/></code>
+  <code><img width="50" src="https://user-images.githubusercontent.com/25181517/192108891-d86b6220-e232-423a-bf5f-90903e6887c3.png" alt="Visual Studio Code" title="Visual Studio Code"/></code>
+  <code><img width="50" src="https://user-images.githubusercontent.com/25181517/192109061-e138ca71-337c-4019-8d42-4792fdaa7128.png" alt="Postman" title="Postman"/></code>
+  <code><img width="50" src="https://user-images.githubusercontent.com/25181517/192158954-f88b5814-d510-4564-b285-dff7d6400dad.png" alt="HTML" title="HTML"/></code>
+  <code><img width="50" src="https://user-images.githubusercontent.com/25181517/183898674-75a4a1b1-f960-4ea9-abcb-637170a00a75.png" alt="CSS" title="CSS"/></code>
+  <code><img width="50" src="https://user-images.githubusercontent.com/25181517/189715289-df3ee512-6eca-463a-a0f4-c10d94a06b2f.png" alt="Figma" title="Figma"/></code>
+  <code><img width="50" src="https://user-images.githubusercontent.com/25181517/117447155-6a868a00-af3d-11eb-9cfe-245df15c9f3f.png" alt="JavaScript" title="JavaScript"/></code>
+  <code><img width="50" src="https://user-images.githubusercontent.com/25181517/183897015-94a058a6-b86e-4e42-a37f-bf92061753e5.png" alt="React" title="React"/></code>
+  <code><img width="50" src="https://user-images.githubusercontent.com/25181517/187896150-cc1dcb12-d490-445c-8e4d-1275cd2388d6.png" alt="Redux" title="Redux"/></code>
+</div>
+
+<br/>
+
+<h3>📫 Feedback</h3>
+
+<p>If you have suggestions or encounter issues, feel free to open an issue or submit a pull request. Contributions are always welcome!</p>
