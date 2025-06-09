@@ -44,7 +44,7 @@ const RadioFilter = ({ onFormChange, value = "" }) => {
                 >
                   <use href={`${sprite}#${formValue}`} />
                 </svg>
-                <p>{label}</p>
+                <span>{label}</span>
               </span>
             </label>
           </div>
