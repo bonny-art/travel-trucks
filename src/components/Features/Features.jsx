@@ -18,6 +18,7 @@ const Features = ({ camper }) => {
     consumption,
     kitchen,
     AC,
+    TV,
     radio,
     bathroom,
     refrigerator,
@@ -27,13 +28,14 @@ const Features = ({ camper }) => {
   } = camper;
 
   const featureItems = [
-    transmission === "automatic" && {
+    {
       icon: "transmission",
       text: capitalizeFirstLetter(transmission),
     },
-    AC && { icon: "ac", text: "AC" },
     { icon: "engine", text: capitalizeFirstLetter(engine) },
+    AC && { icon: "ac", text: "AC" },
     kitchen && { icon: "kitchen", text: "Kitchen" },
+    TV && { icon: "tv", text: "TV" },
     radio && { icon: "radio", text: "Radio" },
     bathroom && { icon: "bathroom", text: "Shower" },
     refrigerator && { icon: "refrigerator", text: "Freezer" },

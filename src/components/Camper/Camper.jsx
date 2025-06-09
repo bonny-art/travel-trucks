@@ -76,20 +76,6 @@ const Camper = () => {
           }}
         />
 
-        <div className={styles.buttonWrapper}>
-          <Button
-            style="transparent"
-            width="145"
-            to={backLocationRef.current}
-            state={{ from: location, scrollToId: camper.id }}
-          >
-            <svg className={styles.icon} aria-hidden="true">
-              <use href={`${sprite}#arrow-left`} />
-            </svg>
-            Back
-          </Button>
-        </div>
-
         <div className={styles.content}>
           <GeneralInfo
             camper={{

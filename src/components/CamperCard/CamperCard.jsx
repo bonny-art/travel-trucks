@@ -30,6 +30,7 @@ const CamperCard = ({ camper }) => {
     transmission,
     engine,
     AC,
+    TV,
     bathroom,
     kitchen,
     radio,
@@ -40,13 +41,14 @@ const CamperCard = ({ camper }) => {
   } = camper;
 
   const baseFeatures = [
-    transmission === "automatic" && {
+    {
       icon: "transmission",
-      label: "Automatic",
+      label: capitalizeFirstLetter(transmission),
     },
     engine && { icon: "engine", label: capitalizeFirstLetter(engine) },
     AC && { icon: "ac", label: "AC" },
     kitchen && { icon: "kitchen", label: "Kitchen" },
+    TV && { icon: "tv", label: "TV" },
     radio && { icon: "radio", label: "Radio" },
     bathroom && { icon: "bathroom", label: "Bathroom" },
     refrigerator && { icon: "refrigerator", label: "Refrigerator" },
@@ -126,6 +128,8 @@ const CamperCard = ({ camper }) => {
             style="orange"
             width="166"
             to={`/catalog/${id}`}
+            target="_blank"
+            rel="noopener noreferrer"
             state={{ from: location }}
             aria-label={`Show more about camper ${name}`}
           >
