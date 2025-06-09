@@ -1,4 +1,3 @@
-import { toTitleCase } from "../../utils/stringUtils";
 import styles from "./LocationInput.module.css";
 import sprite from "../../assets/icons/sprite.svg";
 
@@ -12,7 +11,7 @@ const LocationInput = ({ onLocationSelect, value }) => {
       <input
         type="text"
         onChange={handleInputChange}
-        value={toTitleCase(value)}
+        value={value}
         placeholder="City"
         aria-label="City"
         className={styles.input}
