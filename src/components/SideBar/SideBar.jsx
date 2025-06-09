@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styles from "./SideBar.module.css";
-import LocationInput from "../LocationInput/LocationInput";
-import CheckboxFilter from "../CheckboxFilter/CheckboxFilter";
-import RadioFilter from "../RadioFilter/RadioFilter";
+
 import Button from "../Button/Button";
+import CheckboxFilter from "../CheckboxFilter/CheckboxFilter";
+import LocationInput from "../LocationInput/LocationInput";
+import RadioFilter from "../RadioFilter/RadioFilter";
+
 import {
   campersActions,
   selectFilters,
@@ -15,9 +16,10 @@ import {
   mapFilterFormToApiParams,
 } from "../../utils/filtersTransform";
 
+import styles from "./SideBar.module.css";
+
 const SideBar = () => {
   const dispatch = useDispatch();
-
   const filtersInStore = useSelector(selectFilters);
 
   const [location, setLocation] = useState("");
@@ -26,30 +28,19 @@ const SideBar = () => {
 
   useEffect(() => {
     const {
-      location: locationFromStore = "",
-      equipment: equipmentFromStore = [],
-      form: formFromStore = "",
+      location: loc = "",
+      equipment: equip = [],
+      form: formType = "",
     } = mapApiParamsToFilterFormWithPage(filtersInStore).filters;
 
-    setLocation(locationFromStore);
-    setEquipment(equipmentFromStore);
-    setForm(formFromStore);
+    setLocation(loc);
+    setEquipment(equip);
+    setForm(formType);
   }, [filtersInStore]);
 
   const isFormEmpty =
     !location.trim() && equipment.length === 0 && !form.trim();
 
-  const handleLocationSelect = (newLocation) => {
-    setLocation(newLocation);
-  };
-
-  const handleEquipmentChange = (newEquipment) => {
-    setEquipment([...newEquipment]);
-  };
-
-  const handleFormChange = (newForm) => {
-    setForm(newForm);
-  };
   const handleSearch = () => {
     const filters = {
       location: location.toLowerCase().trim(),
@@ -59,10 +50,9 @@ const SideBar = () => {
 
     const payload = mapFilterFormToApiParams(filters);
 
-    const isSame = JSON.stringify(payload) === JSON.stringify(filtersInStore);
-    if (isSame) return;
-
-    dispatch(campersActions.setFiltersAction(payload));
+    if (JSON.stringify(payload) !== JSON.stringify(filtersInStore)) {
+      dispatch(campersActions.setFiltersAction(payload));
+    }
   };
 
   const handleClear = () => {
@@ -82,10 +72,7 @@ const SideBar = () => {
         <div className={styles.filters}>
           <div className={styles.locationBox}>
             <h3>Location</h3>
-            <LocationInput
-              value={location}
-              onLocationSelect={handleLocationSelect}
-            />
+            <LocationInput value={location} onLocationSelect={setLocation} />
           </div>
 
           <div className={styles.filtersBox}>
@@ -97,15 +84,16 @@ const SideBar = () => {
                 </div>
                 <CheckboxFilter
                   value={equipment}
-                  onEquipmentChange={handleEquipmentChange}
+                  onEquipmentChange={setEquipment}
                 />
               </div>
             </div>
+
             <div className={styles.filterBox}>
               <div className={styles.filterTitle}>
                 <h4>Vehicle type</h4>
               </div>
-              <RadioFilter value={form} onFormChange={handleFormChange} />
+              <RadioFilter value={form} onFormChange={setForm} />
             </div>
           </div>
         </div>

@@ -1,0 +1,13 @@
+.item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.item p {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+
+  color: var(--Main, #101828);
+  text-align: center;
+}

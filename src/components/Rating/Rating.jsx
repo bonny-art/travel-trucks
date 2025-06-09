@@ -1,20 +1,21 @@
-import sprite from "../../assets/icons/sprite.svg";
-import styles from "./Rating.module.css";
 import clsx from "clsx";
 
-const Rating = ({ reviewer_rating }) => {
+import { MAX_RATING } from "../../constants/ui";
+
+import styles from "./Rating.module.css";
+import sprite from "../../assets/icons/sprite.svg";
+
+const Rating = ({ reviewer_rating = 0 }) => {
   return (
     <div className={styles.block}>
-      {[...Array(5)].map((_, index) => {
-        const ratingValue = index + 1;
+      {Array.from({ length: MAX_RATING }, (_, index) => {
+        const isFilled = index < reviewer_rating;
         return (
           <svg
-            key={ratingValue}
+            key={index}
             className={clsx(
               styles.starIcon,
-              ratingValue <= reviewer_rating
-                ? styles.starFilled
-                : styles.starEmpty
+              isFilled ? styles.starFilled : styles.starEmpty
             )}
           >
             <use xlinkHref={`${sprite}#star`} />

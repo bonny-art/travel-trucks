@@ -1,10 +1,12 @@
 import { capitalizeFirstLetter, replaceUnits } from "../../utils/stringUtils";
 import { getType } from "../../utils/mapping";
 
-import styles from "./Features.module.css";
-import sprite from "../../assets/icons/sprite.svg";
+import LabelItem from "../LabelItem/LabelItem";
+import DetailsItem from "../DetailsItem/DetailsItem";
 
-export const Features = ({ camper }) => {
+import styles from "./Features.module.css";
+
+const Features = ({ camper }) => {
   const {
     engine,
     transmission,
@@ -24,36 +26,42 @@ export const Features = ({ camper }) => {
     microwave,
   } = camper;
 
-  const renderLabel = (icon, text, iconStroke = false) => (
-    <div className={styles.label} key={icon}>
-      <svg className={iconStroke ? styles.iconWithStroke : styles.icon}>
-        <use href={`${sprite}#${icon}`} />
-      </svg>
-      <p>{text}</p>
-    </div>
-  );
+  const featureItems = [
+    transmission === "automatic" && {
+      icon: "transmission",
+      text: capitalizeFirstLetter(transmission),
+    },
+    AC && { icon: "ac", text: "AC" },
+    { icon: "engine", text: capitalizeFirstLetter(engine) },
+    kitchen && { icon: "kitchen", text: "Kitchen" },
+    radio && { icon: "radio", text: "Radio" },
+    bathroom && { icon: "bathroom", text: "Shower" },
+    refrigerator && { icon: "refrigerator", text: "Freezer" },
+    gas && { icon: "gas", text: "Gas" },
+    water && { icon: "water", text: "Water", iconStroke: true },
+    microwave && { icon: "microwave", text: "Microwave", iconStroke: true },
+  ].filter(Boolean);
 
-  const renderDetailsItem = (label, value) => (
-    <div className={styles.item} key={label}>
-      <p>{label}</p>
-      <p>{value}</p>
-    </div>
-  );
+  const detailsItems = [
+    { label: "Form", value: getType(form) },
+    { label: "Length", value: replaceUnits(length) },
+    { label: "Width", value: replaceUnits(width) },
+    { label: "Height", value: replaceUnits(height) },
+    { label: "Tank", value: replaceUnits(tank) },
+    { label: "Consumption", value: consumption },
+  ];
 
   return (
     <div className={styles.container}>
       <div className={styles.featuresContainer}>
-        {transmission === "automatic" &&
-          renderLabel("transmission", capitalizeFirstLetter(transmission))}
-        {AC && renderLabel("ac", "AC")}
-        {renderLabel("engine", capitalizeFirstLetter(engine))}
-        {kitchen && renderLabel("kitchen", "Kitchen")}
-        {radio && renderLabel("radio", "Radio")}
-        {bathroom && renderLabel("bathroom", "Shower")}
-        {refrigerator && renderLabel("refrigerator", "Freezer")}
-        {gas && renderLabel("gas", "Gas")}
-        {water && renderLabel("water", "Water", true)}
-        {microwave && renderLabel("microwave", "Microwave", true)}
+        {featureItems.map(({ icon, text, iconStroke = false }) => (
+          <LabelItem
+            key={icon}
+            icon={icon}
+            text={text}
+            iconStroke={iconStroke}
+          />
+        ))}
       </div>
 
       <div className={styles.detailsContainer}>
@@ -62,14 +70,13 @@ export const Features = ({ camper }) => {
         </div>
 
         <div className={styles.list}>
-          {renderDetailsItem("Form", getType(form))}
-          {renderDetailsItem("Length", replaceUnits(length))}
-          {renderDetailsItem("Width", replaceUnits(width))}
-          {renderDetailsItem("Height", replaceUnits(height))}
-          {renderDetailsItem("Tank", replaceUnits(tank))}
-          {renderDetailsItem("Consumption", consumption)}
+          {detailsItems.map(({ label, value }) => (
+            <DetailsItem key={label} label={label} value={value} />
+          ))}
         </div>
       </div>
     </div>
   );
 };
+
+export default Features;

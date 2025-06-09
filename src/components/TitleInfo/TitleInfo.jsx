@@ -1,7 +1,24 @@
-import sprite from "../../assets/icons/sprite.svg";
-import styles from "./TitleInfo.module.css";
+import { memo } from "react";
 
-export const TitleInfo = ({ camper }) => {
+import styles from "./TitleInfo.module.css";
+import sprite from "../../assets/icons/sprite.svg";
+
+const ICONS = [
+  {
+    id: "star",
+    content: (rating, reviews) =>
+      `${rating}(${reviews.length} Review${reviews.length === 1 ? "" : "s"})`,
+    className: styles.starIcon,
+    textClass: styles.camperRating,
+  },
+  {
+    id: "map",
+    content: (_, __, location) => location,
+    className: styles.mapIcon,
+  },
+];
+
+const TitleInfo = memo(({ camper }) => {
   const { name, price, rating, reviews, location } = camper;
 
   return (
@@ -10,27 +27,20 @@ export const TitleInfo = ({ camper }) => {
 
       <div className={styles.attributes}>
         <div className={styles.labels}>
-          <div className={styles.label}>
-            <svg className={styles.starIcon}>
-              <use xlinkHref={`${sprite}#star`} />
-            </svg>
-            <p className={styles.camperRating}>
-              {`${rating}(${reviews.length} Review${
-                reviews.length === 1 ? "" : "s"
-              })`}
-            </p>
-          </div>
-
-          <div className={styles.label}>
-            <svg className={styles.mapIcon}>
-              <use xlinkHref={`${sprite}#map`} />
-            </svg>
-            <p>{location}</p>
-          </div>
+          {ICONS.map(({ id, content, className, textClass }) => (
+            <div key={id} className={styles.label}>
+              <svg className={className}>
+                <use xlinkHref={`${sprite}#${id}`} />
+              </svg>
+              <p className={textClass}>{content(rating, reviews, location)}</p>
+            </div>
+          ))}
         </div>
 
-        <p className={styles.price}>{`€${price.toFixed(2)}`}</p>
+        <p className={styles.price}>€{price.toFixed(2)}</p>
       </div>
     </div>
   );
-};
+});
+
+export default TitleInfo;

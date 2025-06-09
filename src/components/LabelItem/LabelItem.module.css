@@ -1,0 +1,29 @@
+.label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 100px;
+
+  height: 48px;
+  padding: 12px 18px;
+  background: #f2f4f7;
+  mix-blend-mode: multiply;
+}
+
+.label p {
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  fill: var(--black);
+}
+
+.iconWithStroke {
+  width: 20px;
+  height: 20px;
+  fill: transparent;
+  stroke: var(--black);
+}

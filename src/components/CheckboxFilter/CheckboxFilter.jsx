@@ -27,7 +27,7 @@ const CheckboxFilter = ({
         ? value.filter((item) => item !== equipment)
         : [...value, equipment];
 
-      onEquipmentChange(newValue);
+      onEquipmentChange([...newValue]);
     },
     [onEquipmentChange, value]
   );

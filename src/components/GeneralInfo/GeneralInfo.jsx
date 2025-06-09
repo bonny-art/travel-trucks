@@ -1,6 +1,6 @@
 import styles from "./GeneralInfo.module.css";
 
-export const GeneralInfo = ({ camper }) => {
+const GeneralInfo = ({ camper }) => {
   const { name, description, gallery } = camper;
 
   return (
@@ -21,3 +21,5 @@ export const GeneralInfo = ({ camper }) => {
     </div>
   );
 };
+
+export default GeneralInfo;

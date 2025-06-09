@@ -1,14 +1,17 @@
 import Rating from "../Rating/Rating";
+
 import styles from "./ReviewsCard.module.css";
 
 const ReviewsCard = ({ review }) => {
-  const { reviewer_name, reviewer_rating, comment } = review;
+  const { reviewer_name = "", reviewer_rating = 0, comment = "" } = review;
+
+  const initialLetter = reviewer_name.trim()[0]?.toUpperCase() || "";
 
   return (
     <div className={styles.card}>
       <div className={styles.titleBlock}>
         <div className={styles.avatar}>
-          <p>{reviewer_name.trim()[0].toUpperCase()}</p>
+          <p>{initialLetter}</p>
         </div>
 
         <div className={styles.title}>

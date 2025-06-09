@@ -33,7 +33,7 @@ const initialValues = {
 const successTitle = "Message send successfully!";
 const successMessage = "Our manager will contact you shortly!";
 
-export const BookingForm = () => {
+const BookingForm = () => {
   const handleSubmit = (values, actions) => {
     console.log(values);
     showSuccessToast(successTitle, successMessage);
@@ -92,3 +92,5 @@ export const BookingForm = () => {
     </div>
   );
 };
+
+export default BookingForm;

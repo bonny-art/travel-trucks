@@ -7,11 +7,10 @@ import clsx from "clsx";
 import Loader from "../Loader/Loader";
 import Message from "../Message/Message";
 import Button from "../Button/Button";
-import { TitleInfo } from "../TitleInfo/TitleInfo";
-import { GeneralInfo } from "../GeneralInfo/GeneralInfo";
-import { Features } from "../Features/Features";
+import TitleInfo from "../TitleInfo/TitleInfo";
+import GeneralInfo from "../GeneralInfo/GeneralInfo";
 import ReviewsList from "../ReviewsList/ReviewsList";
-import { BookingForm } from "../BookingForm/BookingForm";
+import BookingForm from "../BookingForm/BookingForm";
 
 import {
   selectCurrentCamper,
@@ -24,6 +23,7 @@ import { fetchCamperByIdThunk } from "../../store/campers/campertThunks";
 import styles from "./Camper.module.css";
 
 import sprite from "../../assets/icons/sprite.svg";
+import Features from "../Features/Features";
 
 const Camper = () => {
   const dispatch = useDispatch();

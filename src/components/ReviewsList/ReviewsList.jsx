@@ -1,11 +1,14 @@
 import Message from "../Message/Message";
 import ReviewsCard from "../ReviewsCard/ReviewsCard";
+
 import styles from "./ReviewsList.module.css";
 
-const ReviewsList = ({ reviews }) => {
+const ReviewsList = ({ reviews = [] }) => {
+  const hasReviews = reviews.length > 0;
+
   return (
     <ul className={styles.reviewsContainer}>
-      {reviews.length ? (
+      {hasReviews ? (
         reviews.map((review, index) => (
           <ReviewsCard key={index} review={review} />
         ))
