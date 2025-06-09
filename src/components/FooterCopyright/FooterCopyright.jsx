@@ -11,6 +11,7 @@ const FooterCopyright = () => {
               href="https://www.linkedin.com/in/svitlana-otenko/"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="LinkedIn profile of Svitlana Otenko"
             >
               Svitlana Otenko
             </a>
@@ -19,6 +20,7 @@ const FooterCopyright = () => {
               href="https://goit.ua/"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="GoIT school website"
             >
               GoIT School
             </a>

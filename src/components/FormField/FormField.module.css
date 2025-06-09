@@ -1,32 +1,49 @@
-.fieldWrapper {
+.wrapper {
   position: relative;
 }
 
-.fieldStyled,
-.fieldStyledComment {
-  border: none;
-  border-radius: 10px;
-  padding: 18px;
+.field,
+.fieldComment {
   width: 100%;
+  padding: 18px;
+
+  border: 1px solid transparent;
+  border-radius: 10px;
+
   background: var(--color-lightGray);
 
   font-family: inherit;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
+
+  transition: border-color var(--transition);
 }
 
-.fieldStyled {
+.field {
   height: 60px;
 }
 
-.fieldStyledComment {
+.fieldComment {
   height: 118px;
   resize: none;
   display: block;
 }
 
-.errorStyled {
+.field:hover,
+.field:focus,
+.fieldComment:hover,
+.fieldComment:focus {
+  border-color: var(--color-orange);
+}
+
+.field:focus-visible,
+.fieldComment:focus-visible {
+  border-color: var(--color-blackTransp04);
+  outline: none;
+}
+
+.error {
   position: absolute;
   bottom: -16px;
   left: 18px;

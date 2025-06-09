@@ -20,11 +20,12 @@ const FavoriteButton = ({ camper, isInFavorite }) => {
 
   return (
     <button
-      className={styles.wrapper}
+      className={`${styles.wrapper} ${isInFavorite ? styles.pressed : ""}`}
       type="button"
       onClick={handleFavoriteClick}
+      aria-label={isInFavorite ? "Remove from favorites" : "Add to favorites"}
     >
-      <svg className={styles.icon}>
+      <svg className={styles.icon} aria-hidden="true">
         <use href={`${sprite}#${icon}`} />
       </svg>
     </button>

@@ -1,5 +1,4 @@
 import { toTitleCase } from "../../utils/stringUtils";
-
 import styles from "./LocationInput.module.css";
 import sprite from "../../assets/icons/sprite.svg";
 
@@ -18,7 +17,7 @@ const LocationInput = ({ onLocationSelect, value }) => {
         aria-label="City"
         className={styles.input}
       />
-      <svg className={styles.icon}>
+      <svg className={styles.icon} aria-hidden="true">
         <use href={`${sprite}#map`} />
       </svg>
     </div>

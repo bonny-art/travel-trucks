@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useRef, useState, useCallback } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+
 import { useField } from "formik";
 import { DayPicker, defaultLocale } from "react-day-picker";
 import { format, isBefore, startOfDay } from "date-fns";
@@ -39,7 +40,6 @@ const DateInput = ({ name }) => {
     if (!date) return;
 
     const selected = startOfDay(date);
-
     helpers.setTouched(true);
 
     if (isBefore(selected, today)) {
@@ -57,13 +57,18 @@ const DateInput = ({ name }) => {
         type="text"
         readOnly
         placeholder="Booking date*"
+        aria-label="Booking date"
         value={field.value ? format(field.value, "dd.MM.yyyy") : ""}
         onClick={() => setIsOpen((prev) => !prev)}
         className={styles.fieldStyled}
       />
 
       {isOpen && (
-        <div ref={ref} className={styles.calendarWrapper}>
+        <div
+          ref={ref}
+          className={styles.calendarWrapper}
+          aria-label="Calendar to select booking date"
+        >
           <DayPicker
             mode="single"
             selected={field.value}

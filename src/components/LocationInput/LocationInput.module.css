@@ -6,6 +6,7 @@
   position: absolute;
   top: 18px;
   left: 18px;
+
   width: 18px;
   height: 20px;
 
@@ -13,17 +14,32 @@
 }
 
 .input {
-  border: none;
-  border-radius: 10px;
-  padding: 18px;
-  padding-left: 44px;
+  display: block;
+
   width: 360px;
   height: 56px;
+
+  padding: 18px;
+  padding-left: 44px;
+
+  border: 1px solid transparent;
+  border-radius: 10px;
+
   line-height: 1.25;
+
   background: var(--color-lightGray);
+
+  transition: border-color var(--transition);
+
+  &:hover,
+  :focus {
+    border-color: var(--color-orange);
+  }
 }
 
 .input:focus-visible {
+  border-color: var(--color-blackTransp04);
+
   outline: none;
 }
 

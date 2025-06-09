@@ -13,6 +13,7 @@
   font-weight: 500;
   letter-spacing: -0.01em;
 
+  border: 1px solid transparent;
   transition: border-color var(--transition);
 
   &:hover,

@@ -1,12 +1,9 @@
-import { useEffect } from "react";
-import { useCallback } from "react";
-
+import { useEffect, useCallback } from "react";
 import clsx from "clsx";
 
 import { mapName } from "../../utils/mapping";
 
 import styles from "./CheckboxFilter.module.css";
-
 import sprite from "../../assets/icons/sprite.svg";
 
 const EQUIPMENT_OPTIONS = ["AC", "Automatic", "Kitchen", "TV", "Bathroom"];
@@ -46,6 +43,7 @@ const CheckboxFilter = ({
               className={styles.input}
               checked={checked}
               onChange={() => handleCheckboxChange(equipment)}
+              aria-label={`Select ${equipment}`}
             />
             <label htmlFor={equipment} className={styles.label}>
               <span
@@ -55,7 +53,7 @@ const CheckboxFilter = ({
                   checked && styles.customInputSelected
                 )}
               >
-                <svg className={styles.icon}>
+                <svg className={styles.icon} aria-hidden="true">
                   <use href={`${sprite}#${iconKey}`} />
                 </svg>
                 <p>{equipment}</p>

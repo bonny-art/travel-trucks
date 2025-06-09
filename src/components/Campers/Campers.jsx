@@ -43,6 +43,7 @@ const Campers = () => {
       const firstPageResult = await dispatch(
         fetchCampersThunk({ page: 1, params: filter })
       );
+
       if (!firstPageResult.payload) return;
 
       const totalPages = firstPageResult.payload.totalPages;

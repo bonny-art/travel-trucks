@@ -1,18 +1,18 @@
-import { Formik, Field } from "formik";
+import { Formik } from "formik";
 import * as Yup from "yup";
 import { startOfDay } from "date-fns";
 
 import Button from "../Button/Button";
 import DateInput from "../DateInput/DateInput";
+import FormField from "../FormField/FormField";
 
 import { showSuccessToast } from "../../notifications/showToast";
 
 import styles from "./BookingForm.module.css";
-import FormField from "../FormField/FormField";
 
 const today = startOfDay(new Date());
 
-const validationSchema = Yup.object().shape({
+const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
   email: Yup.string()
     .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Enter a valid email address")
@@ -30,13 +30,18 @@ const initialValues = {
   comment: "",
 };
 
-const successTitle = "Message send successfully!";
-const successMessage = "Our manager will contact you shortly!";
+const fields = [
+  { name: "name", placeholder: "Name*" },
+  { name: "email", placeholder: "Email*" },
+];
 
 const BookingForm = () => {
   const handleSubmit = (values, actions) => {
     console.log(values);
-    showSuccessToast(successTitle, successMessage);
+    showSuccessToast(
+      "Message sent successfully!",
+      "Our manager will contact you shortly!"
+    );
     actions.setSubmitting(false);
     actions.resetForm();
   };
@@ -56,19 +61,15 @@ const BookingForm = () => {
         {(formik) => (
           <form className={styles.formStyled} onSubmit={formik.handleSubmit}>
             <div className={styles.inputs}>
-              <FormField
-                name="name"
-                placeholder="Name*"
-                error={formik.errors.name}
-                touched={formik.touched.name}
-              />
-
-              <FormField
-                name="email"
-                placeholder="Email*"
-                error={formik.errors.email}
-                touched={formik.touched.email}
-              />
+              {fields.map(({ name, placeholder }) => (
+                <FormField
+                  key={name}
+                  name={name}
+                  placeholder={placeholder}
+                  error={formik.errors[name]}
+                  touched={formik.touched[name]}
+                />
+              ))}
 
               <DateInput name="bookingDate" />
 
@@ -82,7 +83,12 @@ const BookingForm = () => {
             </div>
 
             <div className={styles.buttonWrapper}>
-              <Button type="submit" style="orange" width="166">
+              <Button
+                type="submit"
+                style="orange"
+                width="166"
+                aria-label="Send booking form"
+              >
                 Send
               </Button>
             </div>

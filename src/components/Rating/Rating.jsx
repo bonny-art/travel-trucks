@@ -17,8 +17,10 @@ const Rating = ({ reviewer_rating = 0 }) => {
               styles.starIcon,
               isFilled ? styles.starFilled : styles.starEmpty
             )}
+            aria-hidden="true"
+            focusable="false"
           >
-            <use xlinkHref={`${sprite}#star`} />
+            <use href={`${sprite}#star`} />
           </svg>
         );
       })}

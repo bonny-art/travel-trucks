@@ -1,7 +1,6 @@
 .form {
   display: flex;
   flex-wrap: wrap;
-  column-gap: 10px;
   row-gap: 8px;
   column-gap: 12px;
 }
@@ -9,10 +8,12 @@
 .wrapper {
   display: flex;
   gap: 8px;
+
   font-family: "Roboto-Regular";
   font-weight: 400;
   font-size: 16px;
   line-height: 1.25;
+
   user-select: none;
 }
 
@@ -63,9 +64,23 @@
   line-height: 1.25;
   text-align: center;
   color: var(--color-black);
+
+  transition: color var(--transition);
+}
+
+.label:hover p,
+.label:focus-within p {
+  color: var(--color-orange);
 }
 
 .icon {
   width: 32px;
   height: 32px;
+
+  transition: fill var(--transition);
+}
+
+.label:hover .icon,
+.label:focus-within .icon {
+  fill: var(--color-orange);
 }

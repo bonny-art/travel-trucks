@@ -12,6 +12,7 @@ const Home = () => {
             You can find everything you want in our catalog
           </h2>
         </div>
+
         <Button style="orange" width="173" to="/catalog">
           View Now
         </Button>

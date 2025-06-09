@@ -5,4 +5,16 @@
 .icon {
   width: 26px;
   height: 24px;
+
+  transition: stroke var(--transition);
+}
+
+.wrapper:hover .icon,
+.wrapper:focus .icon {
+  stroke: var(--color-black);
+}
+
+.pressed:hover .icon,
+.pressed:focus .icon {
+  stroke: var(--color-orange);
 }

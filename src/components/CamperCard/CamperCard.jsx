@@ -1,15 +1,14 @@
-import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import clsx from "clsx";
 
 import Button from "../Button/Button";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
 
 import { selectFavoriteCampers } from "../../store/campers/campersSlice";
-
 import { capitalizeFirstLetter } from "../../utils/stringUtils";
 
 import styles from "./CamperCard.module.css";
-
 import sprite from "../../assets/icons/sprite.svg";
 
 const CamperCard = ({ camper }) => {
@@ -57,39 +56,51 @@ const CamperCard = ({ camper }) => {
   ].filter(Boolean);
 
   return (
-    <li className={styles.container} key={id} id={`camper-${id}`}>
+    <li className={styles.container} id={`camper-${id}`}>
       <div
-        className={
+        className={clsx(
           endpoint === "favorites" ? styles.imageBoxFavorites : styles.imageBox
-        }
+        )}
       >
-        <img src={gallery[0].thumb} alt={name} />
+        <img
+          src={gallery[0].thumb}
+          alt={`Photo of camper van ${name}`}
+          loading="lazy"
+        />
       </div>
 
       <div
-        className={
+        className={clsx(
           endpoint === "favorites" ? styles.infoBoxFavorites : styles.infoBox
-        }
+        )}
       >
         <div className={styles.head}>
           <div className={styles.titleRow}>
             <h2>{name}</h2>
             <div>
               <p>{`€${price.toFixed(2)}`}</p>
-              <FavoriteButton camper={camper} isInFavorite={isInFavorite} />
+              <FavoriteButton
+                camper={camper}
+                isInFavorite={isInFavorite}
+                aria-label={
+                  isInFavorite
+                    ? `Remove ${name} from favorites`
+                    : `Add ${name} to favorites`
+                }
+              />
             </div>
           </div>
 
           <div className={styles.attributesRow}>
             <div className={styles.attributesItem}>
-              <svg className={styles.star}>
+              <svg className={styles.star} aria-hidden="true">
                 <use href={`${sprite}#star`} />
               </svg>
               <p>{`${rating} (${reviews.length} Reviews)`}</p>
             </div>
 
             <div className={styles.attributesItem}>
-              <svg className={styles.map}>
+              <svg className={styles.map} aria-hidden="true">
                 <use href={`${sprite}#map`} />
               </svg>
               <p>{camperLocation}</p>
@@ -102,7 +113,7 @@ const CamperCard = ({ camper }) => {
         <div className={styles.featuresContainer}>
           {baseFeatures.map(({ icon, label }) => (
             <div key={icon} className={styles.label}>
-              <svg className={styles.icon}>
+              <svg className={styles.icon} aria-hidden="true">
                 <use href={`${sprite}#${icon}`} />
               </svg>
               <p>{label}</p>
@@ -116,6 +127,7 @@ const CamperCard = ({ camper }) => {
             width="166"
             to={`/catalog/${id}`}
             state={{ from: location }}
+            aria-label={`Show more about camper ${name}`}
           >
             Show more
           </Button>

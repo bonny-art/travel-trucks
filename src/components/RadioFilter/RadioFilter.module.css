@@ -56,6 +56,13 @@
   line-height: 1.25;
   text-align: center;
   color: var(--color-black);
+
+  transition: color var(--transition);
+}
+
+.label:hover p,
+.label:focus-within p {
+  color: var(--color-orange);
 }
 
 .customInput.selected {
@@ -65,4 +72,11 @@
 .icon {
   width: 32px;
   height: 32px;
+
+  transition: fill var(--transition);
+}
+
+.label:hover .icon,
+.label:focus-within .icon {
+  fill: var(--color-orange);
 }

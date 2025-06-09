@@ -11,7 +11,7 @@ const links = [
 
 const Navigation = ({ position }) => {
   return (
-    <div className={styles.container}>
+    <nav className={styles.container} aria-label="Main navigation">
       {links.map(({ to, label, end }) => (
         <NavLink
           key={to}
@@ -24,11 +24,12 @@ const Navigation = ({ position }) => {
               position === "header" && styles.headerUnderline
             )
           }
+          aria-current={({ isActive }) => (isActive ? "page" : undefined)}
         >
           <span className={styles.text}>{label}</span>
         </NavLink>
       ))}
-    </div>
+    </nav>
   );
 };
 

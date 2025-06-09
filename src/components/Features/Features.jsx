@@ -1,8 +1,8 @@
-import { capitalizeFirstLetter, replaceUnits } from "../../utils/stringUtils";
-import { getType } from "../../utils/mapping";
-
 import LabelItem from "../LabelItem/LabelItem";
 import DetailsItem from "../DetailsItem/DetailsItem";
+
+import { getType } from "../../utils/mapping";
+import { capitalizeFirstLetter, replaceUnits } from "../../utils/stringUtils";
 
 import styles from "./Features.module.css";
 

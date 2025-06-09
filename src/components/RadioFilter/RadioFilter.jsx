@@ -16,33 +16,40 @@ const RadioFilter = ({ onFormChange, value = "" }) => {
 
   return (
     <form className={styles.form}>
-      {options.map(({ value: formValue, label }) => (
-        <div key={formValue} className={styles.wrapper}>
-          <input
-            id={formValue}
-            type="radio"
-            value={formValue}
-            name="formFilter"
-            onChange={handleChange}
-            checked={value === formValue}
-            className={styles.input}
-          />
-          <label htmlFor={formValue} className={styles.label}>
-            <span
-              className={clsx(
-                styles.customInput,
-                styles[label.toLowerCase().replace(/\s+/g, "-")],
-                { [styles.selected]: value === formValue }
-              )}
-            >
-              <svg className={styles.icon}>
-                <use href={`${sprite}#${formValue}`} />
-              </svg>
-              <p>{label}</p>
-            </span>
-          </label>
-        </div>
-      ))}
+      {options.map(({ value: formValue, label }) => {
+        const iconStyle = styles[label.toLowerCase().replace(/\s+/g, "-")];
+        const isChecked = value === formValue;
+
+        return (
+          <div key={formValue} className={styles.wrapper}>
+            <input
+              id={formValue}
+              type="radio"
+              value={formValue}
+              name="formFilter"
+              onChange={handleChange}
+              checked={isChecked}
+              className={styles.input}
+            />
+            <label htmlFor={formValue} className={styles.label}>
+              <span
+                className={clsx(styles.customInput, iconStyle, {
+                  [styles.selected]: isChecked,
+                })}
+              >
+                <svg
+                  className={styles.icon}
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <use href={`${sprite}#${formValue}`} />
+                </svg>
+                <p>{label}</p>
+              </span>
+            </label>
+          </div>
+        );
+      })}
     </form>
   );
 };

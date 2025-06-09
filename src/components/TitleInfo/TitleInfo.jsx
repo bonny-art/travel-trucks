@@ -10,11 +10,13 @@ const ICONS = [
       `${rating}(${reviews.length} Review${reviews.length === 1 ? "" : "s"})`,
     className: styles.starIcon,
     textClass: styles.camperRating,
+    ariaLabel: "Rating",
   },
   {
     id: "map",
     content: (_, __, location) => location,
     className: styles.mapIcon,
+    ariaLabel: "Location",
   },
 ];
 
@@ -27,14 +29,18 @@ const TitleInfo = memo(({ camper }) => {
 
       <div className={styles.attributes}>
         <div className={styles.labels}>
-          {ICONS.map(({ id, content, className, textClass }) => (
-            <div key={id} className={styles.label}>
-              <svg className={className}>
-                <use xlinkHref={`${sprite}#${id}`} />
-              </svg>
-              <p className={textClass}>{content(rating, reviews, location)}</p>
-            </div>
-          ))}
+          {ICONS.map(
+            ({ id, content, className, textClass = "", ariaLabel }) => (
+              <div key={id} className={styles.label}>
+                <svg className={className} aria-hidden="true">
+                  <use href={`${sprite}#${id}`} />
+                </svg>
+                <p className={textClass} aria-label={ariaLabel}>
+                  {content(rating, reviews, location)}
+                </p>
+              </div>
+            )
+          )}
         </div>
 
         <p className={styles.price}>€{price.toFixed(2)}</p>

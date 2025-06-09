@@ -5,7 +5,8 @@
 
   transition: transform var(--transition);
 
-  &:hover {
+  &:hover,
+  :focus {
     transform: scale(var(--scale));
   }
 }

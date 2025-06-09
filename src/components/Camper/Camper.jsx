@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from "react";
-
-import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import clsx from "clsx";
 
+import Button from "../Button/Button";
+import BookingForm from "../BookingForm/BookingForm";
+import Features from "../Features/Features";
+import GeneralInfo from "../GeneralInfo/GeneralInfo";
 import Loader from "../Loader/Loader";
 import Message from "../Message/Message";
-import Button from "../Button/Button";
-import TitleInfo from "../TitleInfo/TitleInfo";
-import GeneralInfo from "../GeneralInfo/GeneralInfo";
 import ReviewsList from "../ReviewsList/ReviewsList";
-import BookingForm from "../BookingForm/BookingForm";
+import TitleInfo from "../TitleInfo/TitleInfo";
 
 import {
   selectCurrentCamper,
@@ -21,9 +21,9 @@ import {
 import { fetchCamperByIdThunk } from "../../store/campers/campertThunks";
 
 import styles from "./Camper.module.css";
-
 import sprite from "../../assets/icons/sprite.svg";
-import Features from "../Features/Features";
+
+const TABS = ["Features", "Reviews"];
 
 const Camper = () => {
   const dispatch = useDispatch();
@@ -83,7 +83,7 @@ const Camper = () => {
             to={backLocationRef.current}
             state={{ from: location, scrollToId: camper.id }}
           >
-            <svg className={styles.icon}>
+            <svg className={styles.icon} aria-hidden="true">
               <use href={`${sprite}#arrow-left`} />
             </svg>
             Back
@@ -101,7 +101,7 @@ const Camper = () => {
 
           <div className={styles.details}>
             <div className={styles.tabButtonsContainer}>
-              {["Features", "Reviews"].map((tab) => (
+              {TABS.map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
