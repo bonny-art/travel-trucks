@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useDispatch } from "react-redux";
 
 import { campersActions } from "../../store/campers/campersSlice";
@@ -7,6 +8,7 @@ import sprite from "../../assets/icons/sprite.svg";
 
 const FavoriteButton = ({ camper, isInFavorite }) => {
   const dispatch = useDispatch();
+  const buttonRef = useRef(null);
 
   const icon = isInFavorite ? "heart-pressed" : "heart";
 
@@ -16,10 +18,13 @@ const FavoriteButton = ({ camper, isInFavorite }) => {
       : campersActions.addToFavoriteItemsAction(camper);
 
     dispatch(action);
+
+    buttonRef.current?.blur();
   };
 
   return (
     <button
+      ref={buttonRef}
       className={`${styles.wrapper} ${isInFavorite ? styles.pressed : ""}`}
       type="button"
       onClick={handleFavoriteClick}

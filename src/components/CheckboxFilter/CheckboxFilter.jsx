@@ -56,7 +56,7 @@ const CheckboxFilter = ({
                 <svg className={styles.icon} aria-hidden="true">
                   <use href={`${sprite}#${iconKey}`} />
                 </svg>
-                <span>{equipment}</span>
+                <span className={styles.caption}>{equipment}</span>
               </span>
             </label>
           </div>
